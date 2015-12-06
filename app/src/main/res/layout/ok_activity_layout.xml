@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/done_holder"
+    android:background="@color/default_grey"
+    android:gravity="center">
+
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_margin="@dimen/margin32"
+        android:layout_gravity="center"
+        android:src="@drawable/done_logo"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textColor="@color/default_red"
+        android:textSize="28sp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:id="@+id/done_text"/>
+
+</LinearLayout>
