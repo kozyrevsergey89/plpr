@@ -48,11 +48,12 @@
             android:layout_alignParentBottom="true"/>
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:textColor="@color/default_red"
         android:textSize="@dimen/text_size_def"
         android:padding="@dimen/margin8"
         android:text="@string/main_backup"
+        android:layout_centerVertical="true"
         android:id="@+id/main_item_text"
         android:gravity="center_vertical|start"
         android:layout_toEndOf="@id/main_item_icon"

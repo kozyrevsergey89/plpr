@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/main_item_layout">
+
+    <ImageView
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:src="@drawable/backup"
+        android:layout_margin="@dimen/margin8"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:id="@+id/main_item_icon"/>
+
+    <!--<TextView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:textColor="@android:color/holo_red_dark"-->
+    <!--android:textSize="@dimen/text_size_def"-->
+    <!--android:padding="@dimen/margin8"-->
+    <!--android:text="@string/main_backup"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:layout_alignParentTop="true"-->
+    <!--android:id="@+id/main_item_text"-->
+    <!--android:gravity="center_vertical"-->
+    <!--android:layout_toEndOf="@id/main_item_icon"-->
+    <!--android:layout_toRightOf="@id/main_item_icon"-->
+    <!--/>-->
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/arrow_grey"
+        android:id="@+id/main_arrow"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="@dimen/margin8"
+        android:layout_marginLeft="@dimen/margin8"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@drawable/div"
+        android:layout_alignParentBottom="true"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/grey"
+        android:textSize="22sp"
+        android:padding="@dimen/margin8"
+        android:text="@string/main_backup"
+        android:layout_centerVertical="true"
+        android:id="@+id/main_item_text"
+        android:gravity="center_vertical|start"
+        android:layout_toEndOf="@id/main_item_icon"
+        android:layout_toRightOf="@id/main_item_icon"
+        android:layout_toStartOf="@id/main_arrow"
+        android:layout_toLeftOf="@id/main_arrow"
+        />
+
+</RelativeLayout>

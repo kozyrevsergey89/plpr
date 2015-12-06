@@ -1,0 +1,75 @@
+<resources>
+    <string name="app_name">"Platinum Protection"</string>
+
+    <string name="hello_world">Привет Мир!</string>
+    <string name="action_settings">Налаштування</string>
+    <string name="app_title">PLATINUM PROTECTION</string>
+    <string name="login_hint">Логін</string>
+    <string name="password_hint">Пароль</string>
+    <string name="login_btn_label">Увійти</string>
+    <string name="main_backup">Резервне копіювання</string>
+    <string name="main_create_label">Створити резервну копію</string>
+    <string name="main_restore_label">Відновити контактну книгу</string>
+    <string name="main_settings_label">Налаштування</string>
+    <string name="main_bind_new_device_label">Прив\'язати новий пристрій</string>
+    <string name="this_account_bound_to_other_device">До цього облікового запису прив\'язаний інший пристрій!</string>
+    <string name="store_safe">Зберігайте свої дані в безпеці</string>
+    <string name="backup_title">СТВОРИТИ РЕЗЕРВНУ КОПІЮ</string>
+    <string name="backup_contacts">Резервне копіювання контактів</string>
+    <string name="backup_images">Резервне копіювання фотографій</string>
+    <string name="settings_title">НАЛАШТУВАННЯ</string>
+    <string name="settings_admin_label">Дозволити віддалене скидання до заводських налаштувань</string>
+    <string name="settings_ringtone_label">Виберіть мелодію для пошуку телефону</string>
+    <string name="done_backup_label">РЕЗЕРВНА КОПІЯ УСПІШНО СТВОРЕНА!</string>
+    <string name="done_restore_label">ДАНІ УСПІШНО ВІДНОВЛЕНІ!</string>
+    <string name="done_found_label">ЗНАЙШОВСЯ! Натисніть для відключення дзвінка</string>
+
+
+    <string name="app_afg_name">Platinum Protection</string>
+    <string name="backup_vcard">резервне копіювання контактів</string>
+    <string name="restore_vcard">відновлення контактів</string>
+    <string name="enable_wipe">Дозволити віддалене скидання до заводських налаштувань</string>
+    <string name="choose_sound">вибрати мелодію для пошуку</string>
+    <string name="map_new_device">прив\'язати новий пристрій</string>
+    <string name="default_sound">використовуйте мелодію за замовчуванням</string>
+    <string name="founded">Знайдено</string>
+    <string name="no_connection">Помилка з\'єднання, спробуйте пізніше</string>
+    <string name="agree">Згоден</string>
+    <string name="not_mapped">Пристрій не прив\'язаний до Platinum Protection!</string>
+    <string name="login_error">Помилка аутентифікації, невірний пароль або логін</string>
+    <string name="second_user">До цього пристрою вже прив\'язаний аккаунт</string>
+    <string name="only_in_full">Доступно тільки в повній версії</string>
+    <string name="register"><b>Зареєструватися</b></string>
+    <string name="or">або</string>
+    <string name="create_user"><b>Створити аккаунт</b></string>
+    <string name="one_device">Ви не можете мати кілька акаунтів, прив\'язаних до одного пристрою</string>
+    <string name="user_terms">Якщо у вас вже є аккаунт - увійдіть з даними наявних, якщо ні, - створити тестовий аккаунт.</string>
+    <string name="terms_text"><![CDATA[<span style="color:#000000; font-family:'Times New Roman', Times, serif; font-size:10px; font-style: normal;">
+<p>
+ЭТОТ ТЕКСТ ЛУЧШЕ УБРАТЬ
+<p>
+</span>]]></string>
+
+    <string name="registration_form">Реєстрація</string>
+    <string name="pictures_btn">резервне копіювання фотографій</string>
+    <string name="restore_pictures">відновлення фотографій</string>
+    <string name="picture_not_choosen_toast">Не вибрана жодна фотографія!</string>
+
+
+    <!-- Strings related to login -->
+    <string name="login">Логін</string>
+    <string name="prompt_password">Пароль</string>
+    <string name="email">Email</string>
+    <string name="verify">Перевірте пароль</string>
+    <string name="prompt_email">Логін</string>
+    <string name="action_sign_in_register"><b>Увійти</b></string>
+    <string name="action_sign_in_short">Увійти</string>
+    <string name="menu_forgot_password">Відновити забутий пароль</string>
+    <string name="login_progress_signing_in">Вхід&#8230;</string>
+    <string name="error_incorrect_password">Неправильний пароль</string>
+    <string name="error_field_required">Поле є обов\'язковим</string>
+    <string name="progress">Будь ласка очікуйте&#8230;</string>
+
+
+
+</resources>

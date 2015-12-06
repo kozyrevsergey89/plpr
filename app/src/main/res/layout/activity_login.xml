@@ -29,12 +29,12 @@
             android:visibility="gone"/>
 
         <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
             android:src="@drawable/logo"
             android:layout_gravity="top|center_horizontal"/>
 
-        <TextView
+        <com.protection.plpt.plpt.CustomTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin32"

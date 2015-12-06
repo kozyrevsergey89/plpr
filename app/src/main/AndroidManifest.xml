@@ -46,12 +46,14 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
         </activity>
 
         <activity
             android:name=".BackupActivity"
+            android:screenOrientation="portrait"
             android:label="@string/app_name"
             android:theme="@style/AppTheme"
 
@@ -59,17 +61,20 @@
 
         <activity
             android:name=".SettingsActivity"
+            android:screenOrientation="portrait"
             android:label="@string/app_name"
             android:theme="@style/AppTheme"
             />
 
         <activity
             android:name=".OkActivity"
+            android:screenOrientation="portrait"
             android:label="@string/app_name"
             android:theme="@style/AppTheme"
             />
 
-        <activity android:name="com.luminous.pick.CustomGalleryActivity" >
+        <activity android:name="com.luminous.pick.CustomGalleryActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="luminous.ACTION_PICK" />
                 <action android:name="luminous.ACTION_MULTIPLE_PICK" />

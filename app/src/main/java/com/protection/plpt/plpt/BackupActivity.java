@@ -135,7 +135,7 @@ public class BackupActivity extends BaseActivity {
 //        }
 
 
-        contactLader = new ContactLader(this);
+        contactLader = new ContactLader();
         //contactLader.execute();
         mDPM = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
         mDeviceAdminSample = new ComponentName(this, BackupAdminReceiver.class);
@@ -152,7 +152,7 @@ public class BackupActivity extends BaseActivity {
                             break;
                         }
                         showProgress(true);
-                        new ContactLader(BackupActivity.this).execute();
+                        new ContactLader().execute();
                         //GetFileRequest fileRequest = new GetFileRequest().addCookie(userId);
                         //UrlRequestCallback callback = new UrlRequestCallback(this);
                         //sendRequest(callback, fileRequest);
@@ -488,25 +488,21 @@ public class BackupActivity extends BaseActivity {
         }
     }
 
-    private static class ContactLader extends AsyncTask<Void, Void, File> {
+    private class ContactLader extends AsyncTask<Void, Void, File> {
 
-        private Context context;
 
-        public ContactLader(final Context context) {
-            this.context = context;
-        }
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            ((BackupActivity) context).showProgress(true);
+            (BackupActivity.this).showProgress(true);
         }
 
         @Override
         protected File doInBackground(Void... params) {
             ContactsMethod method = new ContactsMethod();
             try {
-                File file = method.getVcardFile(context);
+                File file = method.getVcardFile(BackupActivity.this);
 
                 return file;
             } catch (final IOException e) {
@@ -519,16 +515,16 @@ public class BackupActivity extends BaseActivity {
         protected void onPostExecute(final File result) {
             super.onPostExecute(result);
 
-            if (context != null) {
-                ((BackupActivity) context).sendBackupedFile();
+            if (BackupActivity.this != null) {
+                ((BackupActivity) BackupActivity.this).sendBackupedFile();
 
-                context = null;
+//                BackupActivity.this = null;
             }
             if (result != null) {
                 Log.i("123123", result.getAbsolutePath());
             } else {
-                Toast.makeText(context, "No contacts to backup", Toast.LENGTH_SHORT).show();
-                ((BackupActivity) context).showProgress(false);
+                Toast.makeText(BackupActivity.this, "No contacts to backup", Toast.LENGTH_SHORT).show();
+                ((BackupActivity) BackupActivity.this).showProgress(false);
                 Log.e("123123", "No file");
             }
         }

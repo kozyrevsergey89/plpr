@@ -65,7 +65,7 @@ public class SettingsActivity extends BaseActivity {
         ringtoneLayout = (ViewGroup) findViewById(R.id.settings_ringtone);
 
 
-        ((ImageView) adminLayout.findViewById(R.id.main_item_icon)).setImageResource(R.drawable.settings);
+        ((ImageView) adminLayout.findViewById(R.id.main_item_icon)).setImageResource(R.drawable.admin);
         ((TextView) adminLayout.findViewById(R.id.main_item_text)).setText(R.string.settings_admin_label);
         ((TextView) adminLayout.findViewById(R.id.main_item_text)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
 
