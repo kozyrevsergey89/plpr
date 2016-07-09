@@ -31,15 +31,14 @@
             <!--/>-->
 
         <ImageView
-            android:layout_width="46dp"
-            android:layout_height="46dp"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
             android:src="@drawable/arrow"
             android:id="@+id/main_arrow"
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_marginStart="@dimen/margin8"
-            android:layout_marginLeft="@dimen/margin8"/>
+            />
 
         <View
             android:layout_width="match_parent"

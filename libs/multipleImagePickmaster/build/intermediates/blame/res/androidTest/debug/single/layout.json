@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "/Users/sergii/Development/plpr_android/libs/multipleImagePickmaster/build/intermediates/res/merged/androidTest/debug/layout/gallery_item.xml",
+        "source": "/Users/sergii/Development/plpr_android/libs/multipleImagePickmaster/build/intermediates/bundles/debug/res/layout/gallery_item.xml"
+    },
+    {
+        "merged": "/Users/sergii/Development/plpr_android/libs/multipleImagePickmaster/build/intermediates/res/merged/androidTest/debug/layout/main.xml",
+        "source": "/Users/sergii/Development/plpr_android/libs/multipleImagePickmaster/build/intermediates/bundles/debug/res/layout/main.xml"
+    },
+    {
+        "merged": "/Users/sergii/Development/plpr_android/libs/multipleImagePickmaster/build/intermediates/res/merged/androidTest/debug/layout/gallery.xml",
+        "source": "/Users/sergii/Development/plpr_android/libs/multipleImagePickmaster/build/intermediates/bundles/debug/res/layout/gallery.xml"
+    },
+    {
+        "merged": "/Users/sergii/Development/plpr_android/libs/multipleImagePickmaster/build/intermediates/res/merged/androidTest/debug/layout/titlebar.xml",
+        "source": "/Users/sergii/Development/plpr_android/libs/multipleImagePickmaster/build/intermediates/bundles/debug/res/layout/titlebar.xml"
+    }
+]

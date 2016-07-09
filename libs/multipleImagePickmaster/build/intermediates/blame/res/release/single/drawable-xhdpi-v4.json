@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "/Users/sergii/Development/plpr_android/libs/multipleImagePickmaster/build/intermediates/res/merged/release/drawable-xhdpi-v4/btn.9.png",
+        "source": "/Users/sergii/Development/plpr_android/libs/multipleImagePickmaster/src/main/res/drawable-xhdpi/btn.9.png"
+    },
+    {
+        "merged": "/Users/sergii/Development/plpr_android/libs/multipleImagePickmaster/build/intermediates/res/merged/release/drawable-xhdpi-v4/checkbox_selected.png",
+        "source": "/Users/sergii/Development/plpr_android/libs/multipleImagePickmaster/src/main/res/drawable-xhdpi/checkbox_selected.png"
+    },
+    {
+        "merged": "/Users/sergii/Development/plpr_android/libs/multipleImagePickmaster/build/intermediates/res/merged/release/drawable-xhdpi-v4/btn_hover.9.png",
+        "source": "/Users/sergii/Development/plpr_android/libs/multipleImagePickmaster/src/main/res/drawable-xhdpi/btn_hover.9.png"
+    },
+    {
+        "merged": "/Users/sergii/Development/plpr_android/libs/multipleImagePickmaster/build/intermediates/res/merged/release/drawable-xhdpi-v4/checkbox_up.png",
+        "source": "/Users/sergii/Development/plpr_android/libs/multipleImagePickmaster/src/main/res/drawable-xhdpi/checkbox_up.png"
+    },
+    {
+        "merged": "/Users/sergii/Development/plpr_android/libs/multipleImagePickmaster/build/intermediates/res/merged/release/drawable-xhdpi-v4/ic_launcher.png",
+        "source": "/Users/sergii/Development/plpr_android/libs/multipleImagePickmaster/src/main/res/drawable-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/sergii/Development/plpr_android/libs/multipleImagePickmaster/build/intermediates/res/merged/release/drawable-xhdpi-v4/top_bar.png",
+        "source": "/Users/sergii/Development/plpr_android/libs/multipleImagePickmaster/src/main/res/drawable-xhdpi/top_bar.png"
+    }
+]

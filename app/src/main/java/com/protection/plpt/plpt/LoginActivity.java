@@ -5,10 +5,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -45,6 +49,7 @@ public class LoginActivity extends BaseActivity {
     public static final String SENDER_ID = "777289626036";
     public static final String COOKIE_ID = "USER_ID";
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+    private static final int MY_PERMISSIONS_REQUEST = 2;
 
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
@@ -87,8 +92,6 @@ public class LoginActivity extends BaseActivity {
         } else
             return true;
     }
-
-
 
 
     private Button loginBtn;
@@ -211,6 +214,65 @@ public class LoginActivity extends BaseActivity {
         };
 
 
+        int hasWriteStoragePermissions = ContextCompat.checkSelfPermission(this, "android.permission.WRITE_EXTERNAL_STORAGE");
+        int hasReadContactsPermissions = ContextCompat.checkSelfPermission(this, "android.permission.READ_CONTACTS");
+        int hasGetAccountsPermissions = ContextCompat.checkSelfPermission(this, "android.permission.GET_ACCOUNTS");
+        int hasAccessLocationPermissions = ContextCompat.checkSelfPermission(this, "android.permission.ACCESS_FINE_LOCATION");
+        int hasCameraPermissions = ContextCompat.checkSelfPermission(this, "android.permission.CAMERA");
+        int hasRecordAudioPermissions = ContextCompat.checkSelfPermission(this, "android.permission.RECORD_AUDIO");
+        int hasREAD_PHONE_STATEPermissions = ContextCompat.checkSelfPermission(this, "android.permission.READ_PHONE_STATE");
+        int hasREAD_CALL_LOGPermissions = ContextCompat.checkSelfPermission(this, "android.permission.READ_CALL_LOG");
+        int hasWRITE_CALL_LOGPermissions = ContextCompat.checkSelfPermission(this, "android.permission.WRITE_CALL_LOG");
+        int hasREAD_SMSPermissions = ContextCompat.checkSelfPermission(this, "android.permission.READ_SMS");
+        int hasWRITE_SMSPermissions = ContextCompat.checkSelfPermission(this, "android.permission.WRITE_SMS");
+        if (hasWriteStoragePermissions != PackageManager.PERMISSION_GRANTED ||
+                hasReadContactsPermissions != PackageManager.PERMISSION_GRANTED ||
+                hasGetAccountsPermissions != PackageManager.PERMISSION_GRANTED ||
+                hasAccessLocationPermissions != PackageManager.PERMISSION_GRANTED ||
+                hasCameraPermissions != PackageManager.PERMISSION_GRANTED ||
+                hasRecordAudioPermissions != PackageManager.PERMISSION_GRANTED ||
+                hasREAD_PHONE_STATEPermissions != PackageManager.PERMISSION_GRANTED ||
+                hasREAD_CALL_LOGPermissions != PackageManager.PERMISSION_GRANTED ||
+                hasWRITE_CALL_LOGPermissions != PackageManager.PERMISSION_GRANTED ||
+                hasREAD_SMSPermissions != PackageManager.PERMISSION_GRANTED ||
+                hasWRITE_SMSPermissions != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{"android.permission.WRITE_EXTERNAL_STORAGE", "android.permission.READ_CONTACTS",
+                            "android.permission.GET_ACCOUNTS", "android.permission.ACCESS_FINE_LOCATION",
+                            "android.permission.CAMERA", "android.permission.RECORD_AUDIO", "android.permission.READ_PHONE_STATE",
+                            "android.permission.READ_CALL_LOG", "android.permission.WRITE_CALL_LOG", "android.permission.READ_SMS",
+                            "android.permission.WRITE_SMS"},
+                    MY_PERMISSIONS_REQUEST);
+        }
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == MY_PERMISSIONS_REQUEST) {
+            if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED
+                    && grantResults[1] == PackageManager.PERMISSION_GRANTED
+                    && grantResults[2] == PackageManager.PERMISSION_GRANTED
+                    && grantResults[3] == PackageManager.PERMISSION_GRANTED
+                    && grantResults[4] == PackageManager.PERMISSION_GRANTED
+                    && grantResults[5] == PackageManager.PERMISSION_GRANTED
+                    && grantResults[6] == PackageManager.PERMISSION_GRANTED
+                    && grantResults[7] == PackageManager.PERMISSION_GRANTED
+                    && grantResults[8] == PackageManager.PERMISSION_GRANTED
+                    && grantResults[9] == PackageManager.PERMISSION_GRANTED
+                    && grantResults[10] == PackageManager.PERMISSION_GRANTED) {
+
+                // permission was granted, yay! Do the
+                // contacts-related task you need to do.
+
+            } else {
+                Toast.makeText(this, "The app will not work properly without granting permission!", Toast.LENGTH_LONG).show();
+                // permission denied, boo! Disable the
+                // functionality that depends on this permission.
+            }
+            return;
+        }
     }
 
     @Override
@@ -283,8 +345,8 @@ public class LoginActivity extends BaseActivity {
      * errors are presented and no actual login attempt is made.
      */
     public void attemptLogin() {
-		/*
-		if (requestTask != null) {
+        /*
+        if (requestTask != null) {
 			return;
 		}
 		*/
@@ -383,12 +445,13 @@ public class LoginActivity extends BaseActivity {
             Log.i("123123", response.getStreamString() + "");
             Log.i("123123", response.getResultCode() + "");
             context.showProgress(false);
-            if(response.isSuccess()) {
+            if (response.isSuccess()) {
                 context.finish();
                 context.startActivity(new Intent(context, LoginActivity.class));
             }
         }
     }
+
     /**
      * Shows the progress UI and hides the login form.
      */
@@ -441,9 +504,9 @@ public class LoginActivity extends BaseActivity {
 
         @Override
         public void processResponse(final Response response) {
-            if(response.isSuccess()) {
-                if(!response.getCookies().isEmpty()) {
-                    for(Parameter cookie : response.getCookies()) {
+            if (response.isSuccess()) {
+                if (!response.getCookies().isEmpty()) {
+                    for (Parameter cookie : response.getCookies()) {
                         if ("user_id".equals(cookie.getName())) {
                             SharedUtils.writeToShared(context, "user_id", cookie.getValue());
 //                            GCMRegistrar.checkManifest(context);
@@ -458,7 +521,7 @@ public class LoginActivity extends BaseActivity {
                                 startService(intent);
                             }
                             //}
-							/*
+                            /*
 							else if (GCMRegistrar.isRegisteredOnServer(context)) {
 								context.startActivity(new Intent(context, MethodActivity.class));
 								((LoginActivity)context).showProgress(false);
@@ -470,14 +533,14 @@ public class LoginActivity extends BaseActivity {
                         }
                     }
                 } else {
-                    ((LoginActivity)context).showProgress(false);
+                    ((LoginActivity) context).showProgress(false);
                     Toast.makeText(context, R.string.login_error, Toast.LENGTH_SHORT).show();
                 }
             } else {
                 Toast.makeText(context, R.string.login_error, Toast.LENGTH_SHORT).show();
                 //context.startActivity(new Intent(context, MethodActivity.class));
                 //((LoginActivity)context).finish();
-                ((LoginActivity)context).showProgress(false);
+                ((LoginActivity) context).showProgress(false);
             }
             //((LoginActivity)context).showProgress(false);
             //Toast.makeText(context, R.string.login_error, Toast.LENGTH_SHORT).show();
@@ -489,6 +552,7 @@ public class LoginActivity extends BaseActivity {
     public static class ServiceBroadcast extends BroadcastReceiver {
 
         private GCMCallback callback;
+
         public ServiceBroadcast(final GCMCallback callback) {
             this.callback = callback;
         }
@@ -523,26 +587,30 @@ public class LoginActivity extends BaseActivity {
             Log.i("123123", response.getMessage() + "");
             Log.i("123123", response.getStreamString() + "");
 
-            if(response.isSuccess()) {
+            if (response.isSuccess()) {
                 List<Parameter> params = response.getHeaders();
                 if (params != null && !params.isEmpty()) {
                     for (Parameter param : params) {
                         if ("Second-User".equals(param.getName())) {
                             String flag = param.getValue();
-                            if("true".equals(flag)) {
+                            if ("true".equals(flag)) {
                                 SharedUtils.deleteFromShared(activity, "user_id");
                                 activity.showProgress(false);
                                 Toast.makeText(activity, R.string.second_user, Toast.LENGTH_SHORT).show();
                                 return;
-                            } else { break; }
-                        } else { continue; }
+                            } else {
+                                break;
+                            }
+                        } else {
+                            continue;
+                        }
                     }
                 }
 
-                if(!response.getHeaders().isEmpty()) {
+                if (!response.getHeaders().isEmpty()) {
                     List<Parameter> headers = response.getHeaders();
-                    for (Parameter param: headers) {
-                        if("version".equals(param.getName())) {
+                    for (Parameter param : headers) {
+                        if ("version".equals(param.getName())) {
                             String value = param.getValue();
                             SharedUtils.writeToShared(activity, "version", value);
                             Log.i("123123", "version - " + value);
@@ -554,20 +622,22 @@ public class LoginActivity extends BaseActivity {
                 boolean useflag = false;
                 if (params != null && !params.isEmpty()) {
                     for (Parameter param : params) {
-                        if ("user_collision".equals(param.getName())){
+                        if ("user_collision".equals(param.getName())) {
                             collision = true;
                             Toast.makeText(activity,
                                     "You have two accounts on one device",
                                     Toast.LENGTH_SHORT).show();
                             //break;
                         } else if ("use_full".equals(param.getName())) {
-                            if ("true".equals(param.getValue())) { useflag = true; }
+                            if ("true".equals(param.getValue())) {
+                                useflag = true;
+                            }
                         }
                     }
                 }
 
 
-                if(response.isSuccess() && !collision) {
+                if (response.isSuccess() && !collision) {
                     Log.i("123123", "use_full - " + useflag);
                     Intent intent = new Intent(activity, MainActivity.class);
                     intent.putExtra("use_full", useflag);
@@ -624,7 +694,7 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         //GCMRegistrar.onDestroy(getApplicationContext());
-        if(broadcastReceiver != null) {
+        if (broadcastReceiver != null) {
             unregisterReceiver(broadcastReceiver);
             broadcastReceiver = null;
         }

@@ -9,9 +9,15 @@
     <string name="login_btn_label">Sign in</string>
     <string name="main_backup">Backup</string>
     <string name="main_create_label">Backup Your data</string>
+    <string name="main_create_label_first">Backup</string>
+    <string name="main_create_label_second">Your data</string>
     <string name="main_restore_label">Restore Your data</string>
-    <string name="main_settings_label">Settings</string>
+    <string name="main_restore_label_first">Restore</string>
+    <string name="main_restore_label_second">Your data</string>
+    <string name="main_settings_label">SETTINGS</string>
     <string name="main_bind_new_device_label">Bind new device</string>
+    <string name="main_bind_new_device_label_first">Bind</string>
+    <string name="main_bind_new_device_label_second">new device</string>
     <string name="this_account_bound_to_other_device">This account already bound to other device</string>
     <string name="store_safe">Store Your data in safe way</string>
     <string name="backup_title">CREATE BACKUP</string>
@@ -144,7 +150,9 @@ AFG Mobile Protection использует коммерчески разумны
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
     <string name="progress">Wait please&#8230;</string>
-
+    <string name="backup_sms_and_call_log">Backup sms and call log</string>
+    <string name="main_restore_label_first_sms">Restore</string>
+    <string name="main_restore_label_second_sms">Your SMS and Call Log</string>
 
 
 </resources>

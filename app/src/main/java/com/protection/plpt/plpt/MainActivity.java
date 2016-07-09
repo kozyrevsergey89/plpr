@@ -4,8 +4,12 @@ import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.RelativeSizeSpan;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +17,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.GsonBuilder;
 import com.protection.plpt.plpt.mpkz.mpkz.method.BackupAdminReceiver;
 import com.protection.plpt.plpt.mpkz.mpkz.method.ContactsMethod;
 import com.protection.plpt.plpt.mpkz.mpkz.method.InfoMethod;
+import com.protection.plpt.plpt.mpkz.mpkz.method.SmsJsonDataModel;
+import com.protection.plpt.plpt.mpkz.mpkz.method.SmsMethod;
 import com.protection.plpt.plpt.mpkz.mpkz.net.AsyncCallback;
 import com.protection.plpt.plpt.mpkz.mpkz.net.AsyncRequestor;
 import com.protection.plpt.plpt.mpkz.mpkz.net.request.GCMRequest;
@@ -44,6 +51,7 @@ public class MainActivity extends BaseActivity {
     ViewGroup createLayout;
     ViewGroup restoreLayout;
     ViewGroup settingsLayout;
+    ViewGroup restoreSmsLayout;
     ViewGroup rebindLayout;
     TextView boundDeviceTxt;
 
@@ -75,22 +83,34 @@ public class MainActivity extends BaseActivity {
         createLayout = (ViewGroup) findViewById(R.id.main_backup);
         restoreLayout = (ViewGroup) findViewById(R.id.main_restore);
         settingsLayout = (ViewGroup) findViewById(R.id.main_settings);
+        restoreSmsLayout = (ViewGroup) findViewById(R.id.main_restore_sms);
         rebindLayout = (ViewGroup) findViewById(R.id.main_bind);
         rebindLayout.setVisibility(View.GONE);
         boundDeviceTxt = (TextView) findViewById(R.id.main_bound_device_label);
 
 
+        Spannable createText = new SpannableString(getString(R.string.main_create_label_first).toUpperCase() + "\n" + getString(R.string.main_create_label_second));
+        createText.setSpan(new RelativeSizeSpan(0.5f), getString(R.string.main_create_label_first).length(), createText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         ((ImageView) createLayout.findViewById(R.id.main_item_icon)).setImageResource(R.drawable.backup);
-        ((TextView) createLayout.findViewById(R.id.main_item_text)).setText(R.string.main_create_label);
+        ((TextView) createLayout.findViewById(R.id.main_item_text)).setText(createText);
 
+        Spannable restoreText = new SpannableString(getString(R.string.main_restore_label_first).toUpperCase() + "\n" + getString(R.string.main_restore_label_second));
+        restoreText.setSpan(new RelativeSizeSpan(0.5f), getString(R.string.main_restore_label_first).length(), restoreText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         ((ImageView) restoreLayout.findViewById(R.id.main_item_icon)).setImageResource(R.drawable.restore);
-        ((TextView) restoreLayout.findViewById(R.id.main_item_text)).setText(R.string.main_restore_label);
+        ((TextView) restoreLayout.findViewById(R.id.main_item_text)).setText(restoreText);
 
         ((ImageView) settingsLayout.findViewById(R.id.main_item_icon)).setImageResource(R.drawable.settings);
         ((TextView) settingsLayout.findViewById(R.id.main_item_text)).setText(R.string.main_settings_label);
 
+        Spannable bindText = new SpannableString(getString(R.string.main_bind_new_device_label_first).toUpperCase() + "\n" + getString(R.string.main_bind_new_device_label_second));
+        bindText.setSpan(new RelativeSizeSpan(0.5f), getString(R.string.main_bind_new_device_label_first).length(), bindText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         ((ImageView) rebindLayout.findViewById(R.id.main_item_icon)).setImageResource(R.drawable.restore);
-        ((TextView) rebindLayout.findViewById(R.id.main_item_text)).setText(R.string.main_bind_new_device_label);
+        ((TextView) rebindLayout.findViewById(R.id.main_item_text)).setText(bindText);
+
+        Spannable restoreSmsText = new SpannableString(getString(R.string.main_restore_label_first_sms).toUpperCase() + "\n" + getString(R.string.main_restore_label_second_sms));
+        restoreSmsText.setSpan(new RelativeSizeSpan(0.5f), getString(R.string.main_restore_label_first_sms).length(), restoreSmsText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        ((ImageView) restoreSmsLayout.findViewById(R.id.main_item_icon)).setImageResource(R.drawable.restore);
+        ((TextView) restoreSmsLayout.findViewById(R.id.main_item_text)).setText(restoreSmsText);
 
 
         userId = SharedUtils.getFromShared(this, "user_id");
@@ -175,6 +195,10 @@ public class MainActivity extends BaseActivity {
                         }, request);
                         //showProgress(false);
                         break;
+                    case R.id.main_restore_sms:
+                        showProgress(true);
+                        new SmsRestoreLader().execute();
+                        break;
 
                 }
             }
@@ -184,6 +208,7 @@ public class MainActivity extends BaseActivity {
         restoreLayout.setOnClickListener(onClickListener);
         settingsLayout.setOnClickListener(onClickListener);
         rebindLayout.setOnClickListener(onClickListener);
+        restoreSmsLayout.setOnClickListener(onClickListener);
 
         mDPM = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
         mDeviceAdminSample = new ComponentName(this, BackupAdminReceiver.class);
@@ -207,6 +232,7 @@ public class MainActivity extends BaseActivity {
         Log.i("123123", "common");
         createLayout.setVisibility(View.VISIBLE);
         restoreLayout.setVisibility(View.VISIBLE);
+        restoreSmsLayout.setVisibility(View.VISIBLE);
         settingsLayout.setVisibility(View.VISIBLE);
         rebindLayout.setVisibility(View.GONE);
         boundDeviceTxt.setVisibility(View.GONE);
@@ -216,6 +242,7 @@ public class MainActivity extends BaseActivity {
         Log.i("123123", "bound");
         createLayout.setVisibility(View.GONE);
         restoreLayout.setVisibility(View.GONE);
+        restoreSmsLayout.setVisibility(View.GONE);
         settingsLayout.setVisibility(View.GONE);
         rebindLayout.setVisibility(View.VISIBLE);
         boundDeviceTxt.setVisibility(View.VISIBLE);
@@ -300,6 +327,63 @@ public class MainActivity extends BaseActivity {
         }
 
 
+    }
+
+    private class SmsRestoreLader extends AsyncTask<Void, Void, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+           showProgress(true);
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            GetSmsAndCall get = new GetSmsAndCall();
+            get.addCookie(userId);
+            sendRequest(new AsyncCallback() {
+                @Override public void processResponse(Response response) {
+                    if (response.isSuccess()) {
+                        SmsJsonDataModel smsJsonDataModel = new GsonBuilder().create().fromJson(response.getStreamString(), SmsJsonDataModel.class);
+                        SmsMethod.writeSmsAndCalls(MainActivity.this, smsJsonDataModel.getSmsList(), smsJsonDataModel.getCallList());
+                        Toast.makeText(MainActivity.this, "" + " sms and call log stored successfully! ",
+                            Toast.LENGTH_SHORT).show();
+                        OkActivity.start(MainActivity.this, OkActivity.DONE_RESTORE);
+                    } else {
+                        Log.i("123", "ne proshlo sms restore" + response.getMessage());
+                    }
+                }
+            }, get);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(final String result) {
+            super.onPostExecute(result);
+            showProgress(false);
+
+        }
+    }
+
+    public class GetSmsAndCall extends Request<Serializable> {
+
+        private static final long serialVersionUID = 6468307116960905184L;
+
+        @Override
+        public com.tetra.service.rest.Request.RequestType getRequestType() {
+            return RequestType.GET;
+        }
+
+        @Override
+        public String getUrl() {
+            return "https://plpr-2015.appspot.com/sms_call";
+        }
+
+        public GetSmsAndCall addCookie(final String cookie) {
+            //setHeaders("content-type", "application/xml");
+            setHeaders("Cookie", "user_id=" + cookie);
+            return this;
+        }
     }
 
 

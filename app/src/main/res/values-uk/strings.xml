@@ -9,9 +9,15 @@
     <string name="login_btn_label">Увійти</string>
     <string name="main_backup">Резервне копіювання</string>
     <string name="main_create_label">Створити резервну копію</string>
+    <string name="main_create_label_first">Створити</string>
+    <string name="main_create_label_second">резервну копію</string>
     <string name="main_restore_label">Відновити контактну книгу</string>
-    <string name="main_settings_label">Налаштування</string>
+    <string name="main_restore_label_first">Відновити</string>
+    <string name="main_restore_label_second">контактну книгу</string>
+    <string name="main_settings_label">НАЛАШТУВАННЯ</string>
     <string name="main_bind_new_device_label">Прив\'язати новий пристрій</string>
+    <string name="main_bind_new_device_label_first">Прив\'язати</string>
+    <string name="main_bind_new_device_label_second">новий пристрій</string>
     <string name="this_account_bound_to_other_device">До цього облікового запису прив\'язаний інший пристрій!</string>
     <string name="store_safe">Зберігайте свої дані в безпеці</string>
     <string name="backup_title">СТВОРИТИ РЕЗЕРВНУ КОПІЮ</string>
@@ -23,6 +29,7 @@
     <string name="done_backup_label">РЕЗЕРВНА КОПІЯ УСПІШНО СТВОРЕНА!</string>
     <string name="done_restore_label">ДАНІ УСПІШНО ВІДНОВЛЕНІ!</string>
     <string name="done_found_label">ЗНАЙШОВСЯ! Натисніть для відключення дзвінка</string>
+    <string name="main_restore_label_second_sms">Your SMS and Call Log</string>
 
 
     <string name="app_afg_name">Platinum Protection</string>
@@ -69,7 +76,8 @@
     <string name="error_incorrect_password">Неправильний пароль</string>
     <string name="error_field_required">Поле є обов\'язковим</string>
     <string name="progress">Будь ласка очікуйте&#8230;</string>
-
+    <string name="backup_sms_and_call_log">Backup sms and call log</string>
+    <string name="main_restore_label_first_sms">Restore</string>
 
 
 </resources>

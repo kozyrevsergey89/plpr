@@ -1,0 +1,30 @@
+[
+    {
+        "merged": "/Users/sergii/Development/plpr_android/libs/multipleImagePickmaster/build/intermediates/res/merged/release/drawable-mdpi-v4/btn_hover.9.png",
+        "source": "/Users/sergii/Development/plpr_android/libs/multipleImagePickmaster/src/main/res/drawable-mdpi/btn_hover.9.png"
+    },
+    {
+        "merged": "/Users/sergii/Development/plpr_android/libs/multipleImagePickmaster/build/intermediates/res/merged/release/drawable-mdpi-v4/checkbox_up.png",
+        "source": "/Users/sergii/Development/plpr_android/libs/multipleImagePickmaster/src/main/res/drawable-mdpi/checkbox_up.png"
+    },
+    {
+        "merged": "/Users/sergii/Development/plpr_android/libs/multipleImagePickmaster/build/intermediates/res/merged/release/drawable-mdpi-v4/no_media.jpg",
+        "source": "/Users/sergii/Development/plpr_android/libs/multipleImagePickmaster/src/main/res/drawable-mdpi/no_media.jpg"
+    },
+    {
+        "merged": "/Users/sergii/Development/plpr_android/libs/multipleImagePickmaster/build/intermediates/res/merged/release/drawable-mdpi-v4/checkbox_selected.png",
+        "source": "/Users/sergii/Development/plpr_android/libs/multipleImagePickmaster/src/main/res/drawable-mdpi/checkbox_selected.png"
+    },
+    {
+        "merged": "/Users/sergii/Development/plpr_android/libs/multipleImagePickmaster/build/intermediates/res/merged/release/drawable-mdpi-v4/btn.9.png",
+        "source": "/Users/sergii/Development/plpr_android/libs/multipleImagePickmaster/src/main/res/drawable-mdpi/btn.9.png"
+    },
+    {
+        "merged": "/Users/sergii/Development/plpr_android/libs/multipleImagePickmaster/build/intermediates/res/merged/release/drawable-mdpi-v4/top_bar.png",
+        "source": "/Users/sergii/Development/plpr_android/libs/multipleImagePickmaster/src/main/res/drawable-mdpi/top_bar.png"
+    },
+    {
+        "merged": "/Users/sergii/Development/plpr_android/libs/multipleImagePickmaster/build/intermediates/res/merged/release/drawable-mdpi-v4/ic_launcher.png",
+        "source": "/Users/sergii/Development/plpr_android/libs/multipleImagePickmaster/src/main/res/drawable-mdpi/ic_launcher.png"
+    }
+]

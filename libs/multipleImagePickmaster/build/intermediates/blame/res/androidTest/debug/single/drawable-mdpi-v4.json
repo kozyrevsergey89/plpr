@@ -1,0 +1,30 @@
+[
+    {
+        "merged": "/Users/sergii/Development/plpr_android/libs/multipleImagePickmaster/build/intermediates/res/merged/androidTest/debug/drawable-mdpi-v4/btn_hover.9.png",
+        "source": "/Users/sergii/Development/plpr_android/libs/multipleImagePickmaster/build/intermediates/bundles/debug/res/drawable-mdpi-v4/btn_hover.9.png"
+    },
+    {
+        "merged": "/Users/sergii/Development/plpr_android/libs/multipleImagePickmaster/build/intermediates/res/merged/androidTest/debug/drawable-mdpi-v4/top_bar.png",
+        "source": "/Users/sergii/Development/plpr_android/libs/multipleImagePickmaster/build/intermediates/bundles/debug/res/drawable-mdpi-v4/top_bar.png"
+    },
+    {
+        "merged": "/Users/sergii/Development/plpr_android/libs/multipleImagePickmaster/build/intermediates/res/merged/androidTest/debug/drawable-mdpi-v4/checkbox_selected.png",
+        "source": "/Users/sergii/Development/plpr_android/libs/multipleImagePickmaster/build/intermediates/bundles/debug/res/drawable-mdpi-v4/checkbox_selected.png"
+    },
+    {
+        "merged": "/Users/sergii/Development/plpr_android/libs/multipleImagePickmaster/build/intermediates/res/merged/androidTest/debug/drawable-mdpi-v4/checkbox_up.png",
+        "source": "/Users/sergii/Development/plpr_android/libs/multipleImagePickmaster/build/intermediates/bundles/debug/res/drawable-mdpi-v4/checkbox_up.png"
+    },
+    {
+        "merged": "/Users/sergii/Development/plpr_android/libs/multipleImagePickmaster/build/intermediates/res/merged/androidTest/debug/drawable-mdpi-v4/btn.9.png",
+        "source": "/Users/sergii/Development/plpr_android/libs/multipleImagePickmaster/build/intermediates/bundles/debug/res/drawable-mdpi-v4/btn.9.png"
+    },
+    {
+        "merged": "/Users/sergii/Development/plpr_android/libs/multipleImagePickmaster/build/intermediates/res/merged/androidTest/debug/drawable-mdpi-v4/no_media.jpg",
+        "source": "/Users/sergii/Development/plpr_android/libs/multipleImagePickmaster/build/intermediates/bundles/debug/res/drawable-mdpi-v4/no_media.jpg"
+    },
+    {
+        "merged": "/Users/sergii/Development/plpr_android/libs/multipleImagePickmaster/build/intermediates/res/merged/androidTest/debug/drawable-mdpi-v4/ic_launcher.png",
+        "source": "/Users/sergii/Development/plpr_android/libs/multipleImagePickmaster/build/intermediates/bundles/debug/res/drawable-mdpi-v4/ic_launcher.png"
+    }
+]

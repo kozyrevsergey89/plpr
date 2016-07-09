@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/Users/sergii/Development/plpr_android/libs/multipleImagePickmaster/build/intermediates/res/merged/androidTest/debug/drawable/btn_sel.xml",
+        "source": "/Users/sergii/Development/plpr_android/libs/multipleImagePickmaster/build/intermediates/bundles/debug/res/drawable/btn_sel.xml"
+    },
+    {
+        "merged": "/Users/sergii/Development/plpr_android/libs/multipleImagePickmaster/build/intermediates/res/merged/androidTest/debug/drawable/on_focus_checkbox.xml",
+        "source": "/Users/sergii/Development/plpr_android/libs/multipleImagePickmaster/build/intermediates/bundles/debug/res/drawable/on_focus_checkbox.xml"
+    }
+]

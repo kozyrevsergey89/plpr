@@ -1,6 +1,6 @@
 /*
  * This file is auto-generated.  DO NOT MODIFY.
- * Original file: /Users/sergey/Development/Plpt/libs/tetra/src/main/aidl/com/tetra/service/IRequestCallback.aidl
+ * Original file: /Users/sergii/Development/plpr_android/libs/tetra/src/main/aidl/com/tetra/service/IRequestCallback.aidl
  */
 package com.tetra.service;
 /**
