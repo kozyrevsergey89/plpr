@@ -295,7 +295,7 @@ public class BackupActivity extends BaseActivity {
 
     @Override
     public String getUrl() {
-      return "https://plpr-2015.appspot.com/image_single_backup";
+      return getString(R.string.base_url)+"/image_single_backup";
     }
 
     public PostMediaFile addFile(final File file) {
@@ -322,7 +322,7 @@ public class BackupActivity extends BaseActivity {
 
     @Override
     public String getUrl() {
-      return "https://plpr-2015.appspot.com/sms_call";
+      return getString(R.string.base_url)+"/sms_call";
     }
 
     public PostSmsAndCall addCookie(final String cookie) {
@@ -393,7 +393,7 @@ public class BackupActivity extends BaseActivity {
 
     @Override
     public String getUrl() {
-      return "https://plpr-2015.appspot.com/imagetest";
+      return getString(R.string.base_url)+"/imagetest";
     }
 
     public PostImageFiles addFiles(final File[] files) {
@@ -419,7 +419,7 @@ public class BackupActivity extends BaseActivity {
 
     @Override
     public String getUrl() {
-      return "https://plpr-2015.appspot.com/imagetest";
+      return getString(R.string.base_url)+"/imagetest";
     }
 
     public PostImageFilesZipOneFile addFiles(final File[] files) {

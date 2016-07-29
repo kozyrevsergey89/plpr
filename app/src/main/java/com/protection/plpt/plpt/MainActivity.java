@@ -5,8 +5,11 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.Settings;
+import android.provider.Telephony;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.RelativeSizeSpan;
@@ -37,12 +40,17 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.List;
 
 /**
  * Created by sergey on 8/14/15.
  */
 public class MainActivity extends BaseActivity {
+
+    private static final int DEFAULT_SMS_REQUEST_CODE = 11;
+    private String defaultSmsApp;
 
     public static void start(Context context) {
         context.startActivity(new Intent(context, MainActivity.class));
@@ -196,8 +204,21 @@ public class MainActivity extends BaseActivity {
                         //showProgress(false);
                         break;
                     case R.id.main_restore_sms:
-                        showProgress(true);
-                        new SmsRestoreLader().execute();
+                        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
+
+                            defaultSmsApp = Telephony.Sms.getDefaultSmsPackage(MainActivity.this);
+                            final String myPackageName = getPackageName();
+                            if (!myPackageName.equals(defaultSmsApp)) {
+                                Toast.makeText(MainActivity.this, R.string.sms_default_app, Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent(Telephony.Sms.Intents.ACTION_CHANGE_DEFAULT);
+                                intent.putExtra(Telephony.Sms.Intents.EXTRA_PACKAGE_NAME, MainActivity.this.getPackageName());
+                                startActivityForResult(intent, DEFAULT_SMS_REQUEST_CODE);
+                            } else {
+                                startRestoreSms();
+                            }
+
+                        }
+
                         break;
 
                 }
@@ -212,6 +233,12 @@ public class MainActivity extends BaseActivity {
 
         mDPM = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
         mDeviceAdminSample = new ComponentName(this, BackupAdminReceiver.class);
+
+    }
+
+    private void startRestoreSms() {
+        showProgress(true);
+        new SmsRestoreLader().execute();
     }
 
     private void checkIfDeviceAlreadyBound() {
@@ -273,7 +300,7 @@ public class MainActivity extends BaseActivity {
 
         @Override
         public String getUrl() {
-            return "https://plpr-2015.appspot.com/image_single_backup";
+            return getString(R.string.base_url)+"/image_single_backup";
         }
 
         public PostMediaFile addFile(final File file) {
@@ -344,12 +371,28 @@ public class MainActivity extends BaseActivity {
             sendRequest(new AsyncCallback() {
                 @Override public void processResponse(Response response) {
                     if (response.isSuccess()) {
-                        SmsJsonDataModel smsJsonDataModel = new GsonBuilder().create().fromJson(response.getStreamString(), SmsJsonDataModel.class);
+                        String decoded = "";
+                        try {
+                            decoded = URLDecoder.decode(response.getStreamString(), "UTF-8");
+                            decoded = decoded.substring(1, decoded.length()-2);
+                        } catch (UnsupportedEncodingException e) {
+                            e.printStackTrace();
+                        }
+                        SmsJsonDataModel smsJsonDataModel = new GsonBuilder().create().fromJson(decoded, SmsJsonDataModel.class);
                         SmsMethod.writeSmsAndCalls(MainActivity.this, smsJsonDataModel.getSmsList(), smsJsonDataModel.getCallList());
-                        Toast.makeText(MainActivity.this, "" + " sms and call log stored successfully! ",
-                            Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(MainActivity.this, "" + " sms and call log stored successfully! ",
+//                            Toast.LENGTH_SHORT).show();
+                        showProgress(false);
                         OkActivity.start(MainActivity.this, OkActivity.DONE_RESTORE);
+
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                            Toast.makeText(MainActivity.this, R.string.dont_forget_default_sms_app, Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(Telephony.Sms.Intents.ACTION_CHANGE_DEFAULT);
+                            intent.putExtra(Telephony.Sms.Intents.EXTRA_PACKAGE_NAME, defaultSmsApp);
+                            startActivity(intent);
+                        }
                     } else {
+                        showProgress(false);
                         Log.i("123", "ne proshlo sms restore" + response.getMessage());
                     }
                 }
@@ -360,7 +403,7 @@ public class MainActivity extends BaseActivity {
         @Override
         protected void onPostExecute(final String result) {
             super.onPostExecute(result);
-            showProgress(false);
+//            showProgress(false);
 
         }
     }
@@ -376,7 +419,7 @@ public class MainActivity extends BaseActivity {
 
         @Override
         public String getUrl() {
-            return "https://plpr-2015.appspot.com/sms_call";
+            return getString(R.string.base_url)+"/sms_call";
         }
 
         public GetSmsAndCall addCookie(final String cookie) {
@@ -386,5 +429,14 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        /** check if received result code
+         is equal our requested code for draw permission  */
+        if (requestCode == DEFAULT_SMS_REQUEST_CODE) {
+            startRestoreSms();
+        }
+    }
 
 }

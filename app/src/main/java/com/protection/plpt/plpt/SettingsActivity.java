@@ -224,7 +224,7 @@ public class SettingsActivity extends BaseActivity {
 
         @Override
         public String getUrl() {
-            return "https://plpr-2015.appspot.com/image_single_backup";
+            return getString(R.string.base_url)+"/image_single_backup";
         }
 
         public PostMediaFile addFile(final File file) {

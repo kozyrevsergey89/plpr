@@ -153,6 +153,10 @@ AFG Mobile Protection использует коммерчески разумны
     <string name="backup_sms_and_call_log">Backup sms and call log</string>
     <string name="main_restore_label_first_sms">Restore</string>
     <string name="main_restore_label_second_sms">Your SMS and Call Log</string>
+    <string name="app_will_not_work_properly">The app will not work properly without granting permission!</string>
+    <string name="base_url">https://testplpr777.appspot.com</string>
+    <string name="sms_default_app">Please make this app default sms app to be able to restore sms</string>
+    <string name="dont_forget_default_sms_app">Do not forget to change default sms app back</string>
 
 
 </resources>

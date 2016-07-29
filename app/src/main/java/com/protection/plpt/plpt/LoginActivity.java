@@ -8,8 +8,11 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -214,17 +217,17 @@ public class LoginActivity extends BaseActivity {
         };
 
 
-        int hasWriteStoragePermissions = ContextCompat.checkSelfPermission(this, "android.permission.WRITE_EXTERNAL_STORAGE");
-        int hasReadContactsPermissions = ContextCompat.checkSelfPermission(this, "android.permission.READ_CONTACTS");
+        int hasWriteStoragePermissions = ContextCompat.checkSelfPermission(this, "android.permission.WRITE_EXTERNAL_STORAGE");//
+        int hasReadContactsPermissions = ContextCompat.checkSelfPermission(this, "android.permission.READ_CONTACTS");//
         int hasGetAccountsPermissions = ContextCompat.checkSelfPermission(this, "android.permission.GET_ACCOUNTS");
-        int hasAccessLocationPermissions = ContextCompat.checkSelfPermission(this, "android.permission.ACCESS_FINE_LOCATION");
-        int hasCameraPermissions = ContextCompat.checkSelfPermission(this, "android.permission.CAMERA");
-        int hasRecordAudioPermissions = ContextCompat.checkSelfPermission(this, "android.permission.RECORD_AUDIO");
+        int hasAccessLocationPermissions = ContextCompat.checkSelfPermission(this, "android.permission.ACCESS_FINE_LOCATION");//
+        int hasCameraPermissions = ContextCompat.checkSelfPermission(this, "android.permission.CAMERA");//
+        int hasRecordAudioPermissions = ContextCompat.checkSelfPermission(this, "android.permission.RECORD_AUDIO");//
         int hasREAD_PHONE_STATEPermissions = ContextCompat.checkSelfPermission(this, "android.permission.READ_PHONE_STATE");
         int hasREAD_CALL_LOGPermissions = ContextCompat.checkSelfPermission(this, "android.permission.READ_CALL_LOG");
-        int hasWRITE_CALL_LOGPermissions = ContextCompat.checkSelfPermission(this, "android.permission.WRITE_CALL_LOG");
-        int hasREAD_SMSPermissions = ContextCompat.checkSelfPermission(this, "android.permission.READ_SMS");
-        int hasWRITE_SMSPermissions = ContextCompat.checkSelfPermission(this, "android.permission.WRITE_SMS");
+        int hasWRITE_CALL_LOGPermissions = ContextCompat.checkSelfPermission(this, "android.permission.WRITE_CALL_LOG");//
+        int hasREAD_SMSPermissions = ContextCompat.checkSelfPermission(this, "android.permission.READ_SMS");//
+        int hasWRITE_SMSPermissions = ContextCompat.checkSelfPermission(this, "android.permission.WRITE_SMS");//
         if (hasWriteStoragePermissions != PackageManager.PERMISSION_GRANTED ||
                 hasReadContactsPermissions != PackageManager.PERMISSION_GRANTED ||
                 hasGetAccountsPermissions != PackageManager.PERMISSION_GRANTED ||
@@ -243,6 +246,8 @@ public class LoginActivity extends BaseActivity {
                             "android.permission.READ_CALL_LOG", "android.permission.WRITE_CALL_LOG", "android.permission.READ_SMS",
                             "android.permission.WRITE_SMS"},
                     MY_PERMISSIONS_REQUEST);
+        } else {
+            checkDrawOverlayPermission();
         }
 
     }
@@ -263,11 +268,13 @@ public class LoginActivity extends BaseActivity {
                     && grantResults[9] == PackageManager.PERMISSION_GRANTED
                     && grantResults[10] == PackageManager.PERMISSION_GRANTED) {
 
+                checkDrawOverlayPermission();
                 // permission was granted, yay! Do the
                 // contacts-related task you need to do.
 
             } else {
-                Toast.makeText(this, "The app will not work properly without granting permission!", Toast.LENGTH_LONG).show();
+                checkDrawOverlayPermission();
+                Toast.makeText(this, R.string.app_will_not_work_properly, Toast.LENGTH_LONG).show();
                 // permission denied, boo! Disable the
                 // functionality that depends on this permission.
             }
@@ -522,7 +529,7 @@ public class LoginActivity extends BaseActivity {
                             }
                             //}
                             /*
-							else if (GCMRegistrar.isRegisteredOnServer(context)) {
+                            else if (GCMRegistrar.isRegisteredOnServer(context)) {
 								context.startActivity(new Intent(context, MethodActivity.class));
 								((LoginActivity)context).showProgress(false);
 								((LoginActivity)context).finish();
@@ -706,5 +713,39 @@ public class LoginActivity extends BaseActivity {
         loginRequest = null;
         gcmCallback = null;
         super.onDestroy();
+    }
+
+    /**
+     * code to post/handler request for permission
+     */
+    public final static int REQUEST_CODE = 17;
+
+    public void checkDrawOverlayPermission() {
+        /** check if we already  have permission to draw over other apps */
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (!Settings.canDrawOverlays(this)) {
+                /** if not construct intent to request permission */
+                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                        Uri.parse("package:" + getPackageName()));
+                /** request permission via start activity for result */
+                startActivityForResult(intent, REQUEST_CODE);
+            }
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        /** check if received result code
+         is equal our requested code for draw permission  */
+        if (requestCode == REQUEST_CODE) {
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (Settings.canDrawOverlays(this)) {
+                    // continue here - permission was granted
+                } else {
+                    Toast.makeText(this, R.string.app_will_not_work_properly, Toast.LENGTH_LONG).show();
+                }
+            }
+        }
     }
 }

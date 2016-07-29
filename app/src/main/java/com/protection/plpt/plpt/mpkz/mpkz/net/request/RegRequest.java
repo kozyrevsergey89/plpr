@@ -2,6 +2,8 @@ package com.protection.plpt.plpt.mpkz.mpkz.net.request;
 
 import java.io.Serializable;
 
+import com.protection.plpt.plpt.App;
+import com.protection.plpt.plpt.R;
 import com.tetra.service.rest.Request;
 
 public class RegRequest extends Request<Serializable>{
@@ -24,7 +26,7 @@ public class RegRequest extends Request<Serializable>{
 
 	@Override
 	public String getUrl() {
-		return "https://plpr-2015.appspot.com/signup";
+		return App.getAppContext().getString(R.string.base_url)+"/signup";
 	}
 	
 	public RegRequest setParams(final String name, final String pass, final String email, final String verify) {

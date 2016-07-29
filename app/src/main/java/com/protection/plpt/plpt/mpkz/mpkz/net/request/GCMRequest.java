@@ -2,6 +2,8 @@ package com.protection.plpt.plpt.mpkz.mpkz.net.request;
 
 import java.io.Serializable;
 
+import com.protection.plpt.plpt.App;
+import com.protection.plpt.plpt.R;
 import com.tetra.service.rest.Request;
 
 public class GCMRequest extends Request<Serializable>{
@@ -21,7 +23,7 @@ public class GCMRequest extends Request<Serializable>{
 	//backupbackend.appspot.com
 	@Override
 	public String getUrl() {
-		return "https://plpr-2015.appspot.com/checkgcm/register";
+		return App.getAppContext().getString(R.string.base_url)+"/checkgcm/register";
 	}
 	
 	public GCMRequest addRegId(final String regId) {

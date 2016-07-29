@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import android.location.Location;
 
+import com.protection.plpt.plpt.App;
+import com.protection.plpt.plpt.R;
 import com.tetra.service.rest.Request;
 
 
@@ -22,7 +24,7 @@ public class InfoRequest extends Request<Serializable>{
 
 	@Override
 	public String getUrl() {
-		return "https://plpr-2015.appspot.com/updateuser";
+		return App.getAppContext().getString(R.string.base_url)+"/updateuser";
 	}
 	
 	public InfoRequest addCookie(final String cookie) {

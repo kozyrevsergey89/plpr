@@ -2,6 +2,8 @@ package com.protection.plpt.plpt.mpkz.mpkz.net.request;
 
 import java.io.Serializable;
 
+import com.protection.plpt.plpt.App;
+import com.protection.plpt.plpt.R;
 import com.tetra.service.rest.Request;
 
 public class GetFileRequest extends Request<Serializable>{
@@ -14,7 +16,7 @@ public class GetFileRequest extends Request<Serializable>{
 	}
 
 	@Override
-	public String getUrl() { return "https://plpr-2015.appspot.com/backgeturl"; }
+	public String getUrl() { return App.getAppContext().getString(R.string.base_url)+"/backgeturl"; }
 	
 	public GetFileRequest addCookie(final String cookie) {
 		setHeaders("Cookie", "user_id=" + cookie);

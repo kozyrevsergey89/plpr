@@ -29,7 +29,7 @@
     <string name="done_backup_label">РЕЗЕРВНА КОПІЯ УСПІШНО СТВОРЕНА!</string>
     <string name="done_restore_label">ДАНІ УСПІШНО ВІДНОВЛЕНІ!</string>
     <string name="done_found_label">ЗНАЙШОВСЯ! Натисніть для відключення дзвінка</string>
-    <string name="main_restore_label_second_sms">Your SMS and Call Log</string>
+    <string name="main_restore_label_second_sms">Ваші смс та лог викликів</string>
 
 
     <string name="app_afg_name">Platinum Protection</string>
@@ -76,8 +76,11 @@
     <string name="error_incorrect_password">Неправильний пароль</string>
     <string name="error_field_required">Поле є обов\'язковим</string>
     <string name="progress">Будь ласка очікуйте&#8230;</string>
-    <string name="backup_sms_and_call_log">Backup sms and call log</string>
-    <string name="main_restore_label_first_sms">Restore</string>
+    <string name="backup_sms_and_call_log">Бекап смс та логу дзвінків</string>
+    <string name="main_restore_label_first_sms">Відновити</string>
+    <string name="app_will_not_work_properly">Додаток не буде працювати корректно без прав доступу!</string>
+    <string name="sms_default_app">Please make this app default sms app to be able to restore sms</string>
+    <string name="dont_forget_default_sms_app">Do not forget to change default sms app back</string>
 
 
 </resources>

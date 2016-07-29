@@ -1,13 +1,12 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
-apply plugin: 'uamobitech'
 
 android {
     signingConfigs {
         config {
             keyAlias 'android'
             keyPassword 'android'
-            storeFile file('/Users/sergey/keystore_unl.jks')
+            storeFile file('/Users/sergey/Documents/keystore_plpr.jks')
             storePassword 'android'
         }
     }
@@ -31,6 +30,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    lintOptions {
+        // checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+
 }
 
 dependencies {
