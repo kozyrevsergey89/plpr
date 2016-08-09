@@ -9,8 +9,9 @@ import android.view.ViewGroup;
  * Created by sergey on 8/29/15.
  */
 public class BaseActivity extends AppCompatActivity {
-
+    boolean mIsInProgress;
     void showProgress(boolean isProgressShown) {
+        mIsInProgress = isProgressShown;
         ViewGroup holder = (ViewGroup) findViewById(R.id.holder);
         if (isProgressShown) {
 
@@ -23,6 +24,12 @@ public class BaseActivity extends AppCompatActivity {
                 holder.getChildAt(i).setVisibility(View.VISIBLE);
             }
             findViewById(R.id.progress).setVisibility(View.GONE);
+        }
+    }
+
+    void showProgressIfNeeded(){
+        if (mIsInProgress) {
+            showProgress(mIsInProgress);
         }
     }
 

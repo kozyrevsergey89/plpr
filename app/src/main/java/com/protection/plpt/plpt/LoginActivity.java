@@ -268,16 +268,16 @@ public class LoginActivity extends BaseActivity {
                     && grantResults[9] == PackageManager.PERMISSION_GRANTED
                     && grantResults[10] == PackageManager.PERMISSION_GRANTED) {
 
-                checkDrawOverlayPermission();
+
                 // permission was granted, yay! Do the
                 // contacts-related task you need to do.
 
             } else {
-                checkDrawOverlayPermission();
                 Toast.makeText(this, R.string.app_will_not_work_properly, Toast.LENGTH_LONG).show();
                 // permission denied, boo! Disable the
                 // functionality that depends on this permission.
             }
+            checkDrawOverlayPermission();
             return;
         }
     }
@@ -660,47 +660,9 @@ public class LoginActivity extends BaseActivity {
         }
 
     }
-//
-//    protected void setEmailViewVisible() {
-//        if (mEmailView == null) { return; }
-//        mEmailView.setVisibility(View.VISIBLE);
-//    }
-//
-//    protected void setVerifyViewVisible() {
-//        if (verifyPass == null) { return; }
-//        verifyPass.setVisibility(View.VISIBLE);
-//    }
-//
-//    protected void setRegistrationTextGone() {
-//        if (register == null) { return; }
-//        register.setVisibility(View.GONE);
-//    }
-//
-//    protected void setRegistrationButtonGone() {
-//        if (registrationButton == null) { return; }
-//        registrationButton.setVisibility(View.GONE);
-//    }
-//
-//    protected void setRegistrationStartVisible() {
-//        if (startRegister == null) { return; }
-//        startRegister.setVisibility(View.VISIBLE);
-//    }
-//
-//    protected void setSignInGome() {
-//        if (signIn == null) { return; }
-//        signIn.setVisibility(View.GONE);
-//    }
-//
-//    protected void setTwoDeviceWarningVisible() {
-//        if (userTerms != null && oneDevice != null) {
-//            userTerms.setVisibility(View.GONE);
-//            oneDevice.setVisibility(View.VISIBLE);
-//        }
-//    }
 
     @Override
     protected void onDestroy() {
-        //GCMRegistrar.onDestroy(getApplicationContext());
         if (broadcastReceiver != null) {
             unregisterReceiver(broadcastReceiver);
             broadcastReceiver = null;

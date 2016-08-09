@@ -44,7 +44,7 @@ public class SmsMethod {
     }
 
     public static void writeSmsAndCalls(Context context, List<Sms> smsList, List<Call> callList) {
-        if (!SmsWriteOpUtil.isWriteEnabled(context)) {
+        if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && !SmsWriteOpUtil.isWriteEnabled(context) ) {
             SmsWriteOpUtil.setWriteEnabled(context, true);
         }
 

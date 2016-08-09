@@ -81,6 +81,7 @@
     <string name="app_will_not_work_properly">Додаток не буде працювати корректно без прав доступу!</string>
     <string name="sms_default_app">Please make this app default sms app to be able to restore sms</string>
     <string name="dont_forget_default_sms_app">Do not forget to change default sms app back</string>
+    <string name="base_url">https://testplpr777.appspot.com</string>
 
 
 </resources>

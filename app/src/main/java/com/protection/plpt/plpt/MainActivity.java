@@ -8,7 +8,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.Settings;
 import android.provider.Telephony;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -50,6 +49,7 @@ import java.util.List;
 public class MainActivity extends BaseActivity {
 
     private static final int DEFAULT_SMS_REQUEST_CODE = 11;
+    public static final int REQUEST_CODE_RETURN_SMS_DEFAULT = 48;
     private String defaultSmsApp;
 
     public static void start(Context context) {
@@ -204,6 +204,7 @@ public class MainActivity extends BaseActivity {
                         //showProgress(false);
                         break;
                     case R.id.main_restore_sms:
+                        showProgress(true);
                         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
 
                             defaultSmsApp = Telephony.Sms.getDefaultSmsPackage(MainActivity.this);
@@ -217,6 +218,8 @@ public class MainActivity extends BaseActivity {
                                 startRestoreSms();
                             }
 
+                        } else {
+                            startRestoreSms();
                         }
 
                         break;
@@ -253,6 +256,7 @@ public class MainActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         checkIfDeviceAlreadyBound();
+        showProgressIfNeeded();
     }
 
     private void showCommonBehavior() {
@@ -366,6 +370,7 @@ public class MainActivity extends BaseActivity {
 
         @Override
         protected String doInBackground(Void... params) {
+//            showProgress(true);
             GetSmsAndCall get = new GetSmsAndCall();
             get.addCookie(userId);
             sendRequest(new AsyncCallback() {
@@ -378,19 +383,41 @@ public class MainActivity extends BaseActivity {
                         } catch (UnsupportedEncodingException e) {
                             e.printStackTrace();
                         }
-                        SmsJsonDataModel smsJsonDataModel = new GsonBuilder().create().fromJson(decoded, SmsJsonDataModel.class);
-                        SmsMethod.writeSmsAndCalls(MainActivity.this, smsJsonDataModel.getSmsList(), smsJsonDataModel.getCallList());
+                        final String decodedFinal = decoded;
+                        new AsyncTask<Void,Void,Void>(){
+                            @Override
+                            protected Void doInBackground(Void... params) {
+                                SmsJsonDataModel smsJsonDataModel = new GsonBuilder().create().fromJson(decodedFinal, SmsJsonDataModel.class);
+                                SmsMethod.writeSmsAndCalls(MainActivity.this, smsJsonDataModel.getSmsList(), smsJsonDataModel.getCallList());
+                                return null;
+                            }
+
+                            @Override
+                            protected void onPostExecute(Void aVoid) {
+                                super.onPostExecute(aVoid);
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                                    Toast.makeText(MainActivity.this, R.string.dont_forget_default_sms_app, Toast.LENGTH_LONG).show();
+                                    Intent intent = new Intent(Telephony.Sms.Intents.ACTION_CHANGE_DEFAULT);
+                                    intent.putExtra(Telephony.Sms.Intents.EXTRA_PACKAGE_NAME, defaultSmsApp);
+                                    startActivityForResult(intent, REQUEST_CODE_RETURN_SMS_DEFAULT);
+                                } else {
+                                    showProgress(false);
+                                    OkActivity.start(MainActivity.this, OkActivity.DONE_RESTORE);
+                                }
+                            }
+                        }.execute();
+
 //                        Toast.makeText(MainActivity.this, "" + " sms and call log stored successfully! ",
 //                            Toast.LENGTH_SHORT).show();
-                        showProgress(false);
-                        OkActivity.start(MainActivity.this, OkActivity.DONE_RESTORE);
+//                        showProgress(false);
+//                        OkActivity.start(MainActivity.this, OkActivity.DONE_RESTORE);
 
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                            Toast.makeText(MainActivity.this, R.string.dont_forget_default_sms_app, Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(Telephony.Sms.Intents.ACTION_CHANGE_DEFAULT);
-                            intent.putExtra(Telephony.Sms.Intents.EXTRA_PACKAGE_NAME, defaultSmsApp);
-                            startActivity(intent);
-                        }
+//                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+//                            Toast.makeText(MainActivity.this, R.string.dont_forget_default_sms_app, Toast.LENGTH_LONG).show();
+//                            Intent intent = new Intent(Telephony.Sms.Intents.ACTION_CHANGE_DEFAULT);
+//                            intent.putExtra(Telephony.Sms.Intents.EXTRA_PACKAGE_NAME, defaultSmsApp);
+//                            startActivityForResult(intent, REQUEST_CODE_RETURN_SMS_DEFAULT);
+//                        }
                     } else {
                         showProgress(false);
                         Log.i("123", "ne proshlo sms restore" + response.getMessage());
@@ -436,6 +463,9 @@ public class MainActivity extends BaseActivity {
          is equal our requested code for draw permission  */
         if (requestCode == DEFAULT_SMS_REQUEST_CODE) {
             startRestoreSms();
+        } else if (requestCode == REQUEST_CODE_RETURN_SMS_DEFAULT) {
+            showProgress(false);
+            OkActivity.start(MainActivity.this, OkActivity.DONE_RESTORE);
         }
     }
 
