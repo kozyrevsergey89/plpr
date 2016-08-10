@@ -28,7 +28,7 @@
     <string name="settings_ringtone_label">Выбрать мелодию для поиска телефона</string>
     <string name="done_backup_label">РЕЗЕРВНАЯ КОПИЯ УСПЕШНО СОЗДАНА!</string>
     <string name="done_restore_label">ДАННЫЕ УСПЕШНО ВОССТАНОВЛЕНЫ!</string>
-    <string name="done_found_label">НАШЕЛСЯ!Нажмите для отключения звонка</string>
+    <string name="done_found_label">НАШЕЛСЯ!\nНажмите для отключения звонка</string>
     <string name="main_restore_label_second_sms">Ваши смс и лог звонков</string>
 
 
@@ -82,4 +82,7 @@
     <string name="sms_default_app">Пожалуйста сделайте это приложение главным смс приложением по умолчанию для успешного завершения процедуры восстановления смс</string>
     <string name="dont_forget_default_sms_app">Do not forget to change default sms app back</string>
     <string name="base_url">https://testplpr777.appspot.com</string>
+    <string name="email_subject">Информация от Platinum Protection</string>
+    <string name="email_body_photo">Добрый день\n\nВо вложении фото с вашего мобильного устройства, которое вы запрашивали в личном кабинете Platinum Protection.\n\nПожалуйста, не отвечайте на это письмо.\n\nС уважением, ваш Platinum Protection</string>
+    <string name="email_body_audio">Добрый день\n\nВо вложении аудиозапись с вашего мобильного устройства, которую вы запрашивали в личном кабинете Platinum Protection.\n\nПожалуйста, не отвечайте на это письмо.\n\nС уважением, ваш Platinum Protection</string>
 </resources>

@@ -3,8 +3,10 @@ package com.protection.plpt.plpt.mpkz.mpkz.method;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.graphics.PixelFormat;
 import android.hardware.Camera;
+import android.media.ExifInterface;
 import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
@@ -82,11 +84,29 @@ public class CameraMethod {
                       String fileName = DateFormat.getDateInstance().format(new Date()) + "photo.jpg";
                       file = new File(Environment.getExternalStorageDirectory() + "/dirr",
                           fileName);
+                      if (file.exists()) {
+                        file.delete();
+                      }
                       fileNames.add(Environment.getExternalStorageDirectory() + "/dirr/" +
                           fileName);
 
                       try {
                         FileOutputStream fileOutputStream = new FileOutputStream(file);
+
+                        //rotating picture if needed
+                        ExifInterface exif=new ExifInterface(file.toString());
+                        Log.d("EXIF value", exif.getAttribute(ExifInterface.TAG_ORIENTATION));
+                        if(exif.getAttribute(ExifInterface.TAG_ORIENTATION).equalsIgnoreCase("6")){
+                          bitmap= rotate(bitmap, 90);
+                        } else if(exif.getAttribute(ExifInterface.TAG_ORIENTATION).equalsIgnoreCase("8")){
+                          bitmap= rotate(bitmap, 270);
+                        } else if(exif.getAttribute(ExifInterface.TAG_ORIENTATION).equalsIgnoreCase("3")){
+                          bitmap= rotate(bitmap, 180);
+                        } else if(exif.getAttribute(ExifInterface.TAG_ORIENTATION).equalsIgnoreCase("0")){
+                          bitmap= rotate(bitmap, 270);
+                        }
+
+
                         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
 
                         fileOutputStream.flush();
@@ -142,5 +162,16 @@ public class CameraMethod {
 
   private static void showMessage(String message) {
     Log.i("Camera", message);
+  }
+
+  public static Bitmap rotate(Bitmap bitmap, int degree) {
+    int w = bitmap.getWidth();
+    int h = bitmap.getHeight();
+
+    Matrix mtx = new Matrix();
+    //       mtx.postRotate(degree);
+    mtx.setRotate(degree);
+
+    return Bitmap.createBitmap(bitmap, 0, 0, w, h, mtx, true);
   }
 }

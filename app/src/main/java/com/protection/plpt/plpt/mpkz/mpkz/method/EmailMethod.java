@@ -1,6 +1,9 @@
 package com.protection.plpt.plpt.mpkz.mpkz.method;
 
 import android.util.Log;
+
+import com.protection.plpt.plpt.App;
+import com.protection.plpt.plpt.R;
 import com.protection.plpt.plpt.mpkz.mpkz.method.email.GMailSender;
 
 /**
@@ -8,15 +11,17 @@ import com.protection.plpt.plpt.mpkz.mpkz.method.email.GMailSender;
  */
 public class EmailMethod {
 
-  public static void sendEmail(String fileName, String recipientAddress) {
-    try {
-      GMailSender sender = new GMailSender("kozyrevsergey89@gmail.com", "?DctLjhjubDtlenDHbv!18");
-      sender.sendMail("Secret data from Your Platinum Protection",
-          "This is Body",
-          "autosender@plprotect.com",
-          recipientAddress, fileName);
-    } catch (Exception e) {
-      Log.e("SendMail", e.getMessage(), e);
+    public static void sendEmail(String fileName, String recipientAddress) {
+        try {
+            GMailSender sender = new GMailSender("noreply.plpr@gmail.com", "platprotect2015");
+            sender.sendMail(App.getAppContext().getString(R.string.email_subject),
+                    fileName.contains(".jpg") ?
+                            App.getAppContext().getString(R.string.email_body_photo) :
+                            App.getAppContext().getString(R.string.email_body_audio),
+                    "noreply.plpr@gmail.com",
+                    recipientAddress, fileName);
+        } catch (Exception e) {
+            Log.e("SendMail", e.getMessage(), e);
+        }
     }
-  }
 }
