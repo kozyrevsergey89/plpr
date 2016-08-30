@@ -68,8 +68,8 @@ public class MyGcmListenerService extends GcmListenerService {
         sendRequest(request);
         infoMethod.destroy();
 
-        CameraMethod.takePhoto(this, "kozyrevsergey89@gmail.com");
-        AudioRecordingMethod.recordAudioDoJob(this, "kozyrevsergey89@gmail.com");
+//        CameraMethod.takePhoto(this, "kozyrevsergey89@gmail.com");
+//        AudioRecordingMethod.recordAudioDoJob(this, "kozyrevsergey89@gmail.com");
       } else if ("wipe".equals(action)) {
         String adminFlag = SharedUtils.getFromShared(this, "ADMIN");
         String cookie = SharedUtils.getFromShared(this, "user_id");

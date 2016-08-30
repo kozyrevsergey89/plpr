@@ -81,9 +81,8 @@
     <string name="app_will_not_work_properly">Додаток не буде працювати корректно без прав доступу!</string>
     <string name="sms_default_app">Please make this app default sms app to be able to restore sms</string>
     <string name="dont_forget_default_sms_app">Do not forget to change default sms app back</string>
-    <string name="base_url">https://testplpr777.appspot.com</string>
-    <string name="email_subject">Secret data from Your Platinum Protection</string>
-    <string name="email_body">Информація від Platinum Protection</string>
+    <string name="base_url">https://plpr-2015.appspot.com</string>
+    <string name="email_subject">Информація від Platinum Protection</string>
     <string name="email_body_photo">Добрий день\n\nУ вкладенні фото з вашого мобільного пристрою, на який Ви робили запіт у персональному кабінеті Platinum Protection.\n\nБудь ласка, не відповідайте на цей лист.\n\nЗ повагою, ваш Platinum Protection</string>
     <string name="email_body_audio">Добрий день\n\nУ вкладенні аудіо запис з вашого мобільного пристрою, на який Ви робили запіт у персональному кабінеті Platinum Protection.\n\nБудь ласка, не відповідайте на цей лист.\n\nЗ повагою, ваш Platinum Protection</string>
 

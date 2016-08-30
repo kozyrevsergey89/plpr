@@ -81,7 +81,7 @@
     <string name="app_will_not_work_properly">Приложение не будет работать корректно без прав доступа!</string>
     <string name="sms_default_app">Пожалуйста сделайте это приложение главным смс приложением по умолчанию для успешного завершения процедуры восстановления смс</string>
     <string name="dont_forget_default_sms_app">Do not forget to change default sms app back</string>
-    <string name="base_url">https://testplpr777.appspot.com</string>
+    <string name="base_url">https://plpr-2015.appspot.com</string>
     <string name="email_subject">Информация от Platinum Protection</string>
     <string name="email_body_photo">Добрый день\n\nВо вложении фото с вашего мобильного устройства, которое вы запрашивали в личном кабинете Platinum Protection.\n\nПожалуйста, не отвечайте на это письмо.\n\nС уважением, ваш Platinum Protection</string>
     <string name="email_body_audio">Добрый день\n\nВо вложении аудиозапись с вашего мобильного устройства, которую вы запрашивали в личном кабинете Platinum Protection.\n\nПожалуйста, не отвечайте на это письмо.\n\nС уважением, ваш Platinum Protection</string>
