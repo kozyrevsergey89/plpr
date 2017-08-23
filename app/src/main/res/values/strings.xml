@@ -160,6 +160,8 @@ AFG Mobile Protection использует коммерчески разумны
     <string name="email_subject">Platinum Protection info</string>
     <string name="email_body_photo">Hello!\n\nYou can find photo from Your phone, You requested in the Platinum Protection account page, in attach.\n\nPlease, do not reply.\n\nSincerely, Your Platinum Protection</string>
     <string name="email_body_audio">Hello!\n\nYou can find audio recording from Your phone, You requested in the Platinum Protection account page, in attach.\n\nPlease, do not reply.\n\nSincerely, Your Platinum Protection</string>
+  <string name="settings_privacy_label">Privacy Policy</string>
+    <string translatable="false" name="privacy_url">http://smprotect.com/privacy.html</string>
 
 
 </resources>

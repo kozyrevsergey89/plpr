@@ -65,6 +65,10 @@
             layout="@layout/list_small_item"
             android:id="@+id/settings_ringtone"/>
 
+        <include
+            layout="@layout/list_small_item"
+            android:id="@+id/settings_privacy"/>
+
 
     </LinearLayout>
 

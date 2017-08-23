@@ -38,10 +38,9 @@ public class SettingsActivity extends BaseActivity {
 
     ViewGroup adminLayout;
     ViewGroup ringtoneLayout;
+    ViewGroup privacyLayout;
 
-    //old vars
     public static final int RESULT_ENABLE = 1, RESULT_SOUND = 5;
-    private static final String TAG = "123";
     private String userId;
     private DevicePolicyManager mDPM;
     private ComponentName mDeviceAdminSample;
@@ -63,6 +62,7 @@ public class SettingsActivity extends BaseActivity {
 
         adminLayout = (ViewGroup) findViewById(R.id.settings_admin);
         ringtoneLayout = (ViewGroup) findViewById(R.id.settings_ringtone);
+        privacyLayout = (ViewGroup) findViewById(R.id.settings_privacy);
 
 
         ((ImageView) adminLayout.findViewById(R.id.main_item_icon)).setImageResource(R.drawable.admin);
@@ -72,6 +72,10 @@ public class SettingsActivity extends BaseActivity {
         ((ImageView) ringtoneLayout.findViewById(R.id.main_item_icon)).setImageResource(R.drawable.ringtone);
         ((TextView) ringtoneLayout.findViewById(R.id.main_item_text)).setText(R.string.settings_ringtone_label);
         ((TextView) ringtoneLayout.findViewById(R.id.main_item_text)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+
+        privacyLayout.findViewById(R.id.main_item_icon).setVisibility(View.INVISIBLE);
+        ((TextView) privacyLayout.findViewById(R.id.main_item_text)).setText(R.string.settings_privacy_label);
+        ((TextView) privacyLayout.findViewById(R.id.main_item_text)).setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
 
         //old code
 
@@ -113,6 +117,9 @@ public class SettingsActivity extends BaseActivity {
                                     Toast.LENGTH_SHORT).show();
                         }
                         break;
+                    case R.id.settings_privacy:
+                        PrivacyActivity.start(SettingsActivity.this);
+                        break;
 
                 }
             }
@@ -120,6 +127,7 @@ public class SettingsActivity extends BaseActivity {
 
         adminLayout.setOnClickListener(onClickListener);
         ringtoneLayout.setOnClickListener(onClickListener);
+        privacyLayout.setOnClickListener(onClickListener);
     }
 
 

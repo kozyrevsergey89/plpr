@@ -85,6 +85,6 @@
     <string name="email_subject">Информація від Platinum Protection</string>
     <string name="email_body_photo">Добрий день\n\nУ вкладенні фото з вашого мобільного пристрою, на який Ви робили запіт у персональному кабінеті Platinum Protection.\n\nБудь ласка, не відповідайте на цей лист.\n\nЗ повагою, ваш Platinum Protection</string>
     <string name="email_body_audio">Добрий день\n\nУ вкладенні аудіо запис з вашого мобільного пристрою, на який Ви робили запіт у персональному кабінеті Platinum Protection.\n\nБудь ласка, не відповідайте на цей лист.\n\nЗ повагою, ваш Platinum Protection</string>
-
+    <string name="settings_privacy_label">Політика конфіденційності</string>
 
 </resources>

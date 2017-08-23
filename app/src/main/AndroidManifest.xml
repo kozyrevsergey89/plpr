@@ -92,6 +92,11 @@
         android:theme="@style/AppTheme"
     />
 
+    <activity android:name=".PrivacyActivity"
+        android:screenOrientation="portrait"
+        android:label="@string/settings_privacy_label"
+        android:theme="@style/AppTheme"
+    />
     <activity android:name="com.luminous.pick.CustomGalleryActivity"
         android:screenOrientation="portrait">
       <intent-filter>
