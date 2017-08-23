@@ -1,6 +1,9 @@
 package com.protection.plpt.plpt;
 
+import android.app.AlertDialog;
+import android.app.admin.DevicePolicyManager;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -24,6 +27,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -33,6 +37,7 @@ import android.widget.Toast;
 import com.google.android.gcm.GCMRegistrar;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.protection.plpt.plpt.mpkz.mpkz.method.BackupAdminReceiver;
 import com.protection.plpt.plpt.mpkz.mpkz.method.InfoMethod;
 import com.protection.plpt.plpt.mpkz.mpkz.net.AsyncCallback;
 import com.protection.plpt.plpt.mpkz.mpkz.net.AsyncRequestor;
@@ -250,6 +255,22 @@ public class LoginActivity extends BaseActivity {
             checkDrawOverlayPermission();
         }
 
+        // Show info about Device Administrator Permissions request
+        DevicePolicyManager mDPM = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
+        ComponentName mDeviceAdminSample = new ComponentName(this, BackupAdminReceiver.class);
+        if(!mDPM.isAdminActive(mDeviceAdminSample)) {
+            //View dialogView = getLayoutInflater().inflate(R.layout.admin_dialog, null, false);
+            //WebView dialogWebView = (WebView) dialogView.findViewById(R.id.web_view);
+            WebView dialogWebView = new WebView(this);
+            dialogWebView.getSettings().setJavaScriptEnabled(true);
+            dialogWebView.loadUrl("http://smprotect.com/dap.html");
+
+            AlertDialog alertDialog =
+                new AlertDialog.Builder(LoginActivity.this, R.style.DialogeTheme).
+                    setView(dialogWebView).
+                    setNegativeButton("Ok", null).create();
+            alertDialog.show();
+        }
     }
 
     @Override
