@@ -51,13 +51,7 @@
             layout="@layout/list_small_item"
             android:id="@+id/backup_images"/>
 
-        <include
-            layout="@layout/list_small_item"
-            android:id="@+id/backup_sms_and_call_log"/>
-
-
     </LinearLayout>
-
 
 </ScrollView>
 

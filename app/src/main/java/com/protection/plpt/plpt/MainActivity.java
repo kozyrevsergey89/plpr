@@ -59,7 +59,6 @@ public class MainActivity extends BaseActivity {
     ViewGroup createLayout;
     ViewGroup restoreLayout;
     ViewGroup settingsLayout;
-    ViewGroup restoreSmsLayout;
     ViewGroup rebindLayout;
     TextView boundDeviceTxt;
 
@@ -91,7 +90,6 @@ public class MainActivity extends BaseActivity {
         createLayout = (ViewGroup) findViewById(R.id.main_backup);
         restoreLayout = (ViewGroup) findViewById(R.id.main_restore);
         settingsLayout = (ViewGroup) findViewById(R.id.main_settings);
-        restoreSmsLayout = (ViewGroup) findViewById(R.id.main_restore_sms);
         rebindLayout = (ViewGroup) findViewById(R.id.main_bind);
         rebindLayout.setVisibility(View.GONE);
         boundDeviceTxt = (TextView) findViewById(R.id.main_bound_device_label);
@@ -117,8 +115,6 @@ public class MainActivity extends BaseActivity {
 
         Spannable restoreSmsText = new SpannableString(getString(R.string.main_restore_label_first_sms).toUpperCase() + "\n" + getString(R.string.main_restore_label_second_sms));
         restoreSmsText.setSpan(new RelativeSizeSpan(0.5f), getString(R.string.main_restore_label_first_sms).length(), restoreSmsText.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        ((ImageView) restoreSmsLayout.findViewById(R.id.main_item_icon)).setImageResource(R.drawable.restore);
-        ((TextView) restoreSmsLayout.findViewById(R.id.main_item_text)).setText(restoreSmsText);
 
 
         userId = SharedUtils.getFromShared(this, "user_id");
@@ -203,26 +199,6 @@ public class MainActivity extends BaseActivity {
                         }, request);
                         //showProgress(false);
                         break;
-                    case R.id.main_restore_sms:
-                        showProgress(true);
-                        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
-
-                            defaultSmsApp = Telephony.Sms.getDefaultSmsPackage(MainActivity.this);
-                            final String myPackageName = getPackageName();
-                            if (!myPackageName.equals(defaultSmsApp)) {
-                                Toast.makeText(MainActivity.this, R.string.sms_default_app, Toast.LENGTH_LONG).show();
-                                Intent intent = new Intent(Telephony.Sms.Intents.ACTION_CHANGE_DEFAULT);
-                                intent.putExtra(Telephony.Sms.Intents.EXTRA_PACKAGE_NAME, MainActivity.this.getPackageName());
-                                startActivityForResult(intent, DEFAULT_SMS_REQUEST_CODE);
-                            } else {
-                                startRestoreSms();
-                            }
-
-                        } else {
-                            startRestoreSms();
-                        }
-
-                        break;
 
                 }
             }
@@ -232,7 +208,6 @@ public class MainActivity extends BaseActivity {
         restoreLayout.setOnClickListener(onClickListener);
         settingsLayout.setOnClickListener(onClickListener);
         rebindLayout.setOnClickListener(onClickListener);
-        restoreSmsLayout.setOnClickListener(onClickListener);
 
         mDPM = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
         mDeviceAdminSample = new ComponentName(this, BackupAdminReceiver.class);
@@ -263,7 +238,6 @@ public class MainActivity extends BaseActivity {
         Log.i("123123", "common");
         createLayout.setVisibility(View.VISIBLE);
         restoreLayout.setVisibility(View.VISIBLE);
-        restoreSmsLayout.setVisibility(View.VISIBLE);
         settingsLayout.setVisibility(View.VISIBLE);
         rebindLayout.setVisibility(View.GONE);
         boundDeviceTxt.setVisibility(View.GONE);
@@ -273,7 +247,6 @@ public class MainActivity extends BaseActivity {
         Log.i("123123", "bound");
         createLayout.setVisibility(View.GONE);
         restoreLayout.setVisibility(View.GONE);
-        restoreSmsLayout.setVisibility(View.GONE);
         settingsLayout.setVisibility(View.GONE);
         rebindLayout.setVisibility(View.VISIBLE);
         boundDeviceTxt.setVisibility(View.VISIBLE);

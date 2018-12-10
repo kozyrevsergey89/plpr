@@ -14,14 +14,14 @@ android {
         exclude 'META-INF/LICENSE.txt'
         exclude 'META-INF/NOTICE.txt'
     }
-    compileSdkVersion 23
+    compileSdkVersion 26
     buildToolsVersion '21.1.2'
     defaultConfig {
         applicationId "com.protection.plpt.plpt"
         minSdkVersion 14
-        targetSdkVersion 23
-        versionCode 7
-        versionName "4.3"
+        targetSdkVersion 26
+        versionCode 8
+        versionName "4.4"
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
     }
@@ -41,7 +41,7 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.google.android.gms:play-services:9.0.0'
     compile 'com.android.support:appcompat-v7:23.2.1'
     compile project(':libs:multipleImagePickmaster')

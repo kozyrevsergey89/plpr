@@ -70,10 +70,6 @@
 
         <include
             layout="@layout/list_item"
-            android:id="@+id/main_restore_sms"/>
-
-        <include
-            layout="@layout/list_item"
             android:id="@+id/main_settings"/>
 
         <include
