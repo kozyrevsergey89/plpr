@@ -7,6 +7,7 @@ import android.graphics.Matrix;
 import android.graphics.PixelFormat;
 import android.hardware.Camera;
 import android.media.ExifInterface;
+import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
@@ -147,7 +148,9 @@ public class CameraMethod {
             .getSystemService(Context.WINDOW_SERVICE);
         WindowManager.LayoutParams params = new WindowManager.LayoutParams(
             1, 1, //Must be at least 1x1
-            WindowManager.LayoutParams.TYPE_SYSTEM_OVERLAY,
+                Build.VERSION.SDK_INT < Build.VERSION_CODES.O ?
+                        WindowManager.LayoutParams.TYPE_SYSTEM_OVERLAY :
+                        WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
             0,
             //Don't know if this is a safe default
             PixelFormat.UNKNOWN);
