@@ -229,27 +229,23 @@ public class LoginActivity extends BaseActivity {
         int hasCameraPermissions = ContextCompat.checkSelfPermission(this, "android.permission.CAMERA");//
         int hasRecordAudioPermissions = ContextCompat.checkSelfPermission(this, "android.permission.RECORD_AUDIO");//
         int hasREAD_PHONE_STATEPermissions = ContextCompat.checkSelfPermission(this, "android.permission.READ_PHONE_STATE");
-        int hasREAD_CALL_LOGPermissions = ContextCompat.checkSelfPermission(this, "android.permission.READ_CALL_LOG");
-        int hasWRITE_CALL_LOGPermissions = ContextCompat.checkSelfPermission(this, "android.permission.WRITE_CALL_LOG");//
-        int hasREAD_SMSPermissions = ContextCompat.checkSelfPermission(this, "android.permission.READ_SMS");//
-        int hasWRITE_SMSPermissions = ContextCompat.checkSelfPermission(this, "android.permission.WRITE_SMS");//
         if (hasWriteStoragePermissions != PackageManager.PERMISSION_GRANTED ||
                 hasReadContactsPermissions != PackageManager.PERMISSION_GRANTED ||
                 hasGetAccountsPermissions != PackageManager.PERMISSION_GRANTED ||
                 hasAccessLocationPermissions != PackageManager.PERMISSION_GRANTED ||
                 hasCameraPermissions != PackageManager.PERMISSION_GRANTED ||
                 hasRecordAudioPermissions != PackageManager.PERMISSION_GRANTED ||
-                hasREAD_PHONE_STATEPermissions != PackageManager.PERMISSION_GRANTED ||
-                hasREAD_CALL_LOGPermissions != PackageManager.PERMISSION_GRANTED ||
-                hasWRITE_CALL_LOGPermissions != PackageManager.PERMISSION_GRANTED ||
-                hasREAD_SMSPermissions != PackageManager.PERMISSION_GRANTED ||
-                hasWRITE_SMSPermissions != PackageManager.PERMISSION_GRANTED) {
+                hasREAD_PHONE_STATEPermissions != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
-                    new String[]{"android.permission.WRITE_EXTERNAL_STORAGE", "android.permission.READ_CONTACTS",
-                            "android.permission.GET_ACCOUNTS", "android.permission.ACCESS_FINE_LOCATION",
-                            "android.permission.CAMERA", "android.permission.RECORD_AUDIO", "android.permission.READ_PHONE_STATE",
-                            "android.permission.READ_CALL_LOG", "android.permission.WRITE_CALL_LOG", "android.permission.READ_SMS",
-                            "android.permission.WRITE_SMS"},
+                    new String[]{
+                            "android.permission.WRITE_EXTERNAL_STORAGE",
+                            "android.permission.READ_CONTACTS",
+                            "android.permission.GET_ACCOUNTS",
+                            "android.permission.ACCESS_FINE_LOCATION",
+                            "android.permission.CAMERA",
+                            "android.permission.RECORD_AUDIO",
+                            "android.permission.READ_PHONE_STATE"
+                    },
                     MY_PERMISSIONS_REQUEST);
         } else {
             checkDrawOverlayPermission();
@@ -283,11 +279,7 @@ public class LoginActivity extends BaseActivity {
                     && grantResults[3] == PackageManager.PERMISSION_GRANTED
                     && grantResults[4] == PackageManager.PERMISSION_GRANTED
                     && grantResults[5] == PackageManager.PERMISSION_GRANTED
-                    && grantResults[6] == PackageManager.PERMISSION_GRANTED
-                    && grantResults[7] == PackageManager.PERMISSION_GRANTED
-                    && grantResults[8] == PackageManager.PERMISSION_GRANTED
-                    && grantResults[9] == PackageManager.PERMISSION_GRANTED
-                    && grantResults[10] == PackageManager.PERMISSION_GRANTED) {
+                    && grantResults[6] == PackageManager.PERMISSION_GRANTED) {
 
 
                 // permission was granted, yay! Do the
