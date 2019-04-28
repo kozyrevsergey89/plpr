@@ -1,5 +1,6 @@
 package com.protection.plpt.plpt.mpkz.mpkz.method;
 
+
 import org.apache.http.conn.util.InetAddressUtils;
 
 import java.io.BufferedInputStream;
@@ -108,7 +109,7 @@ public class Utils {
                 for (InetAddress addr : addrs) {
                     if (!addr.isLoopbackAddress()) {
                         String sAddr = addr.getHostAddress().toUpperCase();
-                        boolean isIPv4 = InetAddressUtils.isIPv4Address(sAddr); 
+                        boolean isIPv4 = InetAddressUtils.isIPv4Address(sAddr);
                         if (useIPv4) {
                             if (isIPv4) 
                                 return sAddr;

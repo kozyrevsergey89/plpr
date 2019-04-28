@@ -10,7 +10,7 @@ import android.provider.CallLog;
 import android.provider.Telephony;
 import android.support.v4.app.ActivityCompat;
 
-import com.google.gson.Gson;
+
 import com.google.gson.GsonBuilder;
 
 import java.util.List;

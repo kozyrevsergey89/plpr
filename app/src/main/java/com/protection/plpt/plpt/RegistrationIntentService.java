@@ -7,13 +7,20 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
+import android.widget.Toast;
 
-import com.google.android.gms.gcm.GcmPubSub;
-import com.google.android.gms.gcm.GoogleCloudMessaging;
-import com.google.android.gms.iid.InstanceID;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.protection.plpt.plpt.mpkz.mpkz.method.InfoMethod;
+import com.protection.plpt.plpt.mpkz.mpkz.net.AsyncCallback;
+import com.protection.plpt.plpt.mpkz.mpkz.net.AsyncRequestor;
+import com.protection.plpt.plpt.mpkz.mpkz.net.request.GCMRequest;
 import com.protection.plpt.plpt.mpkz.mpkz.utils.SharedUtils;
+import com.tetra.service.rest.Parameter;
+import com.tetra.service.rest.Response;
 
-import java.io.IOException;
+import java.util.List;
+
 
 /**
  * Created by sergey on 9/11/15.
@@ -42,17 +49,14 @@ public class RegistrationIntentService extends IntentService {
             // Initially this call goes out to the network to retrieve the token, subsequent calls
             // are local.
             // [START get_token]
-            InstanceID instanceID = InstanceID.getInstance(this);
-            token = instanceID.getToken(SENDER_ID,
-                    GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
+            FirebaseApp.initializeApp(this);
+            token = FirebaseInstanceId.getInstance().getToken();
             // [END get_token]
             Log.i(TAG, "GCM Registration Token: " + token);
 
             // TODO: Implement this method to send any registration to your app's servers.
-            sendRegistrationToServer(token);
+//            sendRegistrationToServer(token);
 
-            // Subscribe to topic channels
-//            subscribeTopics(token);
 
             // You should store a boolean that indicates whether the generated token has been
             // sent to your server. If the boolean is false, send the token to your server,
@@ -70,7 +74,7 @@ public class RegistrationIntentService extends IntentService {
         }
         // Notify UI that registration has completed, so the progress indicator can be hidden.
         Intent registrationComplete = new Intent(QuickstartPreferences.REGISTRATION_COMPLETE);
-        registrationComplete.putExtra(GCMIntentService.ID_MESSAGE, token);
+        registrationComplete.putExtra(ID_MESSAGE, token);
         LocalBroadcastManager.getInstance(this).sendBroadcast(registrationComplete);
     }
 
@@ -82,7 +86,7 @@ public class RegistrationIntentService extends IntentService {
 
     /**
      * Persist registration to third-party servers.
-     *
+     * <p>
      * Modify this method to associate the user's GCM registration token with any server-side account
      * maintained by your application.
      *
@@ -90,20 +94,86 @@ public class RegistrationIntentService extends IntentService {
      */
     private void sendRegistrationToServer(String token) {
         // Add custom implementation, as needed.
+
+        SharedUtils.writeToShared(this, "reg_id", token);
+        AsyncRequestor requestor = new AsyncRequestor(new GCMLocalCallback(this));
+        String cookie = SharedUtils.getFromShared(this, "user_id");
+        GCMRequest request = new GCMRequest().addRegId(token)
+                .addCookie(cookie)
+                .addDeviceId(new InfoMethod(this).getImey());
+        requestor.execute(request);
     }
 
-    /**
-     * Subscribe to any GCM topics of interest, as defined by the TOPICS constant.
-     *
-     * @param token GCM token
-     * @throws java.io.IOException if unable to reach the GCM PubSub service
-     */
-    // [START subscribe_topics]
-//    private void subscribeTopics(String token) throws IOException {
-//        GcmPubSub pubSub = GcmPubSub.getInstance(this);
-//        for (String topic : TOPICS) {
-//            pubSub.subscribe(token, "/topics/" + topic, null);
-//        }
-//    }
-// [END subscribe_topics]
- }
+    private static class GCMLocalCallback extends AsyncCallback {
+
+        private Context context;
+
+        public GCMLocalCallback(final Context context) {
+            this.context = context;
+        }
+
+        @Override
+        public void processResponse(final Response response) {
+            Log.i("123123", response.getResultCode() + "");
+            Log.i("123123", response.getMessage() + "");
+            Log.i("123123", response.getStreamString() + "");
+
+            if (response.isSuccess()) {
+                List<Parameter> params = response.getHeaders();
+                if (params != null && !params.isEmpty()) {
+                    for (Parameter param : params) {
+                        if ("Second-User".equals(param.getName())) {
+                            String flag = param.getValue();
+                            if ("true".equals(flag)) {
+                                SharedUtils.deleteFromShared(context, "user_id");
+//                                activity.showProgress(false);
+                                Toast.makeText(context, R.string.second_user, Toast.LENGTH_SHORT).show();
+                                return;
+                            } else {
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                if (!response.getHeaders().isEmpty()) {
+                    List<Parameter> headers = response.getHeaders();
+                    for (Parameter param : headers) {
+                        if ("version".equals(param.getName())) {
+                            String value = param.getValue();
+                            SharedUtils.writeToShared(context, "version", value);
+                            Log.i("123123", "version - " + value);
+                        }
+                    }
+                }
+
+                boolean collision = false;
+                boolean useflag = false;
+                if (params != null && !params.isEmpty()) {
+                    for (Parameter param : params) {
+                        if ("user_collision".equals(param.getName())) {
+                            collision = true;
+                            Toast.makeText(context,
+                                    "You have two accounts on one device",
+                                    Toast.LENGTH_SHORT).show();
+                            //break;
+                        } else if ("use_full".equals(param.getName())) {
+                            if ("true".equals(param.getValue())) {
+                                useflag = true;
+                            }
+                        }
+                    }
+                }
+
+                if (response.isSuccess() && !collision) {
+                    Log.i("123123", "use_full - " + useflag);
+//                    do nothing
+                } else {
+//                    do nothing
+                }
+
+            }
+        }
+
+    }
+}
