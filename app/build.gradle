@@ -20,8 +20,8 @@ android {
         applicationId "com.protection.plpt.plpt"
         minSdkVersion 14
         targetSdkVersion 28
-        versionCode 8
-        versionName "4.4"
+        versionCode 11
+        versionName "4.8"
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
     }
