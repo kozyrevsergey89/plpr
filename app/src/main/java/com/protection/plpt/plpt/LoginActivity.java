@@ -8,14 +8,12 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -159,17 +157,9 @@ public class LoginActivity extends BaseActivity {
                     && grantResults[2] == PackageManager.PERMISSION_GRANTED
                     && grantResults[3] == PackageManager.PERMISSION_GRANTED
                     && grantResults[4] == PackageManager.PERMISSION_GRANTED
-                    && grantResults[5] == PackageManager.PERMISSION_GRANTED
-                    && grantResults[6] == PackageManager.PERMISSION_GRANTED
-                    && grantResults[7] == PackageManager.PERMISSION_GRANTED
-                    && grantResults[8] == PackageManager.PERMISSION_GRANTED
-                    && grantResults[9] == PackageManager.PERMISSION_GRANTED
-                    && grantResults[10] == PackageManager.PERMISSION_GRANTED) {
-
-
+                    && grantResults[5] == PackageManager.PERMISSION_GRANTED) {
                 // permission was granted, yay! Do the
                 // contacts-related task you need to do.
-
             } else {
                 Toast.makeText(this, R.string.app_will_not_work_properly, Toast.LENGTH_LONG).show();
                 // permission denied, boo! Disable the
