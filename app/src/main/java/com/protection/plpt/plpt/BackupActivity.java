@@ -38,7 +38,6 @@ public class BackupActivity extends BaseActivity {
 
   ViewGroup imagesLayout;
   ViewGroup contactsLayout;
-  ViewGroup smsCallLogLayout;
 
   //old vars section
   public static final int RESULT_ENABLE = 1, RESULT_SOUND = 5;
@@ -70,7 +69,6 @@ public class BackupActivity extends BaseActivity {
 
     imagesLayout = (ViewGroup) findViewById(R.id.backup_images);
     contactsLayout = (ViewGroup) findViewById(R.id.backup_contacts);
-    smsCallLogLayout = (ViewGroup) findViewById(R.id.backup_sms_and_call_log);
 
     ((ImageView) imagesLayout.findViewById(R.id.main_item_icon)).setImageResource(
         R.drawable.copy_images);
@@ -79,11 +77,6 @@ public class BackupActivity extends BaseActivity {
     ((ImageView) contactsLayout.findViewById(R.id.main_item_icon)).setImageResource(
         R.drawable.copy_contacts);
     ((TextView) contactsLayout.findViewById(R.id.main_item_text)).setText(R.string.backup_contacts);
-
-    ((ImageView) smsCallLogLayout.findViewById(R.id.main_item_icon)).setImageResource(
-        R.drawable.copy_contacts);
-    ((TextView) smsCallLogLayout.findViewById(R.id.main_item_text)).setText(
-        R.string.backup_sms_and_call_log);
 
     //old code section
 
@@ -117,17 +110,12 @@ public class BackupActivity extends BaseActivity {
             startActivityForResult(/*Intent.createChooser(intent,
                         "Select Picture")*/intent, SELECT_PICTURE);
             break;
-          case R.id.backup_sms_and_call_log:
-            showProgress(true);
-            new SmsLader().execute();
-            break;
         }
       }
     };
 
     imagesLayout.setOnClickListener(onClickListener);
     contactsLayout.setOnClickListener(onClickListener);
-    smsCallLogLayout.setOnClickListener(onClickListener);
   }
 
   //old methods section

@@ -2,11 +2,14 @@ package com.protection.plpt.plpt.mpkz.mpkz.method;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.content.res.AssetFileDescriptor;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.ContactsContract;
+import android.support.v4.content.FileProvider;
 import android.util.Log;
 
 import java.io.File;
@@ -62,11 +65,19 @@ public class ContactsMethod {
             e1.printStackTrace();
         }
     }
+	
+	public void importContacts(final Context context){
+    	Intent intent = new Intent(Intent.ACTION_VIEW);
+		Uri fileUri = FileProvider.getUriForFile(context, context.getApplicationContext().getPackageName() + ".com.protection.plpt.provider", new File(Environment.getExternalStorageDirectory().toString() + File.separator+vfile));
+		intent.setDataAndType(fileUri,"text/x-vcard"); //|we have vfile="backup.vcf"|storage path is path of your vcf file and vFile is name of that file.
 
-    public void importContacts(final Context context) {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setDataAndType(Uri.fromFile(new File(Environment.getExternalStorageDirectory().toString() + File.separator + vfile)), "text/x-vcard"); //|we have vfile="backup.vcf"|storage path is path of your vcf file and vFile is name of that file.
-        context.startActivity(intent);
+		List<ResolveInfo> resInfoList = context.getPackageManager().queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+		for (ResolveInfo resolveInfo : resInfoList) {
+			String packageName = resolveInfo.activityInfo.packageName;
+			context.grantUriPermission(packageName, fileUri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
+		}
+
+		context.startActivity(intent);
     }
 
 

@@ -10,17 +10,13 @@
   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
   <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
   <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
-  <!--<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />-->
   <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
   <uses-permission android:name="android.permission.UPDATE_APP_OPS_STATS"/>
 
   <uses-permission android:name="android.permission.CAMERA"/>
   <uses-feature android:name="android.hardware.camera"/>
 
-  <uses-permission android:name="android.permission.READ_CALL_LOG"/>
-  <uses-permission android:name="android.permission.WRITE_CALL_LOG"/>
-  <uses-permission android:name="android.permission.READ_SMS"/>
-  <uses-permission android:name="android.permission.WRITE_SMS"/>
+  <uses-permission
   <uses-permission android:name="android.permission.RECORD_AUDIO" />
   <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
 
@@ -155,6 +151,16 @@
         <data android:mimeType="application/vnd.wap.mms-message" />
       </intent-filter>
     </receiver>
+
+    <provider
+        android:name="android.support.v4.content.FileProvider"
+        android:authorities="${applicationId}.com.protection.plpt.provider"
+        android:exported="false"
+        android:grantUriPermissions="true">
+      <meta-data
+          android:name="android.support.FILE_PROVIDER_PATHS"
+          android:resource="@xml/file_provider_paths"/>
+    </provider>
 
   </application>
 

@@ -150,8 +150,6 @@ public class LoginActivity extends BaseActivity {
         }
     }
 
-
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == MY_PERMISSIONS_REQUEST) {
@@ -188,8 +186,6 @@ public class LoginActivity extends BaseActivity {
         checkPermissions();
         checkAccessNotificationsPolicy();
         checkDrawOverlayPermission();
-//        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
-//                new IntentFilter(QuickstartPreferences.REGISTRATION_COMPLETE));
     }
 
     @Override
@@ -206,27 +202,23 @@ public class LoginActivity extends BaseActivity {
         int hasCameraPermissions = ContextCompat.checkSelfPermission(this, "android.permission.CAMERA");//
         int hasRecordAudioPermissions = ContextCompat.checkSelfPermission(this, "android.permission.RECORD_AUDIO");//
         int hasREAD_PHONE_STATEPermissions = ContextCompat.checkSelfPermission(this, "android.permission.READ_PHONE_STATE");
-        int hasREAD_CALL_LOGPermissions = ContextCompat.checkSelfPermission(this, "android.permission.READ_CALL_LOG");
-        int hasWRITE_CALL_LOGPermissions = ContextCompat.checkSelfPermission(this, "android.permission.WRITE_CALL_LOG");//
-        int hasREAD_SMSPermissions = ContextCompat.checkSelfPermission(this, "android.permission.READ_SMS");//
-        int hasWRITE_SMSPermissions = ContextCompat.checkSelfPermission(this, "android.permission.WRITE_SMS");//
         if (hasWriteStoragePermissions != PackageManager.PERMISSION_GRANTED ||
                 hasReadContactsPermissions != PackageManager.PERMISSION_GRANTED ||
                 hasGetAccountsPermissions != PackageManager.PERMISSION_GRANTED ||
                 hasAccessLocationPermissions != PackageManager.PERMISSION_GRANTED ||
                 hasCameraPermissions != PackageManager.PERMISSION_GRANTED ||
                 hasRecordAudioPermissions != PackageManager.PERMISSION_GRANTED ||
-                hasREAD_PHONE_STATEPermissions != PackageManager.PERMISSION_GRANTED ||
-                hasREAD_CALL_LOGPermissions != PackageManager.PERMISSION_GRANTED ||
-                hasWRITE_CALL_LOGPermissions != PackageManager.PERMISSION_GRANTED ||
-                hasREAD_SMSPermissions != PackageManager.PERMISSION_GRANTED ||
-                hasWRITE_SMSPermissions != PackageManager.PERMISSION_GRANTED) {
+                hasREAD_PHONE_STATEPermissions != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
-                    new String[]{"android.permission.WRITE_EXTERNAL_STORAGE", "android.permission.READ_CONTACTS",
-                            "android.permission.GET_ACCOUNTS", "android.permission.ACCESS_FINE_LOCATION",
-                            "android.permission.CAMERA", "android.permission.RECORD_AUDIO", "android.permission.READ_PHONE_STATE",
-                            "android.permission.READ_CALL_LOG", "android.permission.WRITE_CALL_LOG", "android.permission.READ_SMS",
-                            "android.permission.WRITE_SMS"},
+                    new String[]{
+                            "android.permission.WRITE_EXTERNAL_STORAGE",
+                            "android.permission.READ_CONTACTS",
+                            "android.permission.GET_ACCOUNTS",
+                            "android.permission.ACCESS_FINE_LOCATION",
+                            "android.permission.CAMERA",
+                            "android.permission.RECORD_AUDIO",
+                            "android.permission.READ_PHONE_STATE"
+                            },
                     MY_PERMISSIONS_REQUEST);
         }
     }
@@ -263,8 +255,6 @@ public class LoginActivity extends BaseActivity {
         return true;
     }
 
-
-    //old code
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -432,7 +422,6 @@ public class LoginActivity extends BaseActivity {
         @Override
         public void onReceive(final Context context, final Intent intent) {
             Log.i("123123", "servicebroadcast receiver after gcm registration");
-//            GCMRegistrar.setRegisteredOnServer(context, true);
             String newMessage = intent.getExtras().getString(ID_MESSAGE);
             SharedUtils.writeToShared(context, "reg_id", newMessage);
             AsyncRequestor requestor = new AsyncRequestor(callback);
